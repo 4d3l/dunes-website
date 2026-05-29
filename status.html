@@ -3,14 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Service Status | Dunes Chat</title>
+    <title>Dunes Chat</title>
     
     <!-- SEO Meta Tags -->
     <meta name="description" content="Real-time operational status, network latency, and uptime graphs for Dunes Secure Messenger relay networks.">
     
     <!-- Favicon & Branding -->
-    <link rel="icon" type="image/png" href="assets/favicon.png">
-    <link rel="apple-touch-icon" href="assets/icon.png">
+    <link rel="icon" type="image/png" href="assets/favicon.png?v=2">
+    <link rel="shortcut icon" type="image/png" href="assets/favicon.png?v=2">
+    <link rel="apple-touch-icon" href="assets/icon.png?v=2">
 
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -281,8 +282,10 @@
 <body>
 
     <!-- Background Desert Atmosphere -->
-    <div class="desert-sky"></div>
-    <div class="ambient-sand-glow"></div>
+    <div class="bg-wrapper">
+        <div class="desert-sky"></div>
+        <div class="ambient-sand-glow"></div>
+    </div>
 
     <!-- Header / Navigation Bar -->
     <header class="glass-header" id="navbar">
@@ -412,39 +415,6 @@
             </div>
         </div>
 
-        <!-- Latency Ping Tool -->
-        <div class="status-section-card glass-card animate-slide-up" style="animation-delay: 0.3s;">
-            <h3>
-                <span>Real-time Wakeup & Signal Latency</span>
-                <span class="system-overall-percent" style="color: var(--color-text-secondary); font-weight: normal;">Interactive</span>
-            </h3>
-            
-            <p style="color: var(--color-text-secondary); font-size: 0.95rem; margin-bottom: 20px;">
-                Dunes relies on peer-to-peer signalling and FCM data wakeup services. Trigger a mock server ping test below to measure current relay server latency from your terminal.
-            </p>
-
-            <div class="latency-ping-wrapper">
-                <div class="latency-card">
-                    <span class="latency-name">Primary Signal Relay (Render Node)</span>
-                    <span class="latency-val" id="primary-relay-val">
-                        <span class="latency-dot"></span>
-                        <span class="latency-ms">14 ms</span>
-                    </span>
-                </div>
-                <div class="latency-card">
-                    <span class="latency-name">Firebase FCM Push Wakeup Service</span>
-                    <span class="latency-val">
-                        <span class="latency-dot" style="background-color: var(--color-online);"></span>
-                        <span>Active</span>
-                    </span>
-                </div>
-            </div>
-
-            <div class="ping-btn-box">
-                <button class="btn btn-primary" id="btn-test-ping">Run Server Ping Test</button>
-            </div>
-        </div>
-
     </div>
 
     <!-- Footer -->
@@ -459,33 +429,5 @@
             </div>
         </div>
     </footer>
-
-    <!-- Latency Ping Logic script -->
-    <script>
-        const btnPing = document.getElementById('btn-test-ping');
-        const primaryRelay = document.getElementById('primary-relay-val');
-
-        if (btnPing && primaryRelay) {
-            btnPing.addEventListener('click', () => {
-                btnPing.disabled = true;
-                btnPing.textContent = 'Pinging dunes.chat Relays...';
-                
-                const msText = primaryRelay.querySelector('.latency-ms');
-                const dot = primaryRelay.querySelector('.latency-dot');
-                
-                msText.textContent = 'Measuring...';
-                dot.style.backgroundColor = 'var(--color-accent)';
-                
-                setTimeout(() => {
-                    // Generate a beautiful, realistic low-latency metric (e.g. 10ms - 22ms)
-                    const simulatedPing = Math.floor(Math.random() * 12) + 10;
-                    msText.textContent = `${simulatedPing} ms`;
-                    dot.style.backgroundColor = 'var(--color-online)';
-                    btnPing.disabled = false;
-                    btnPing.textContent = 'Run Server Ping Test';
-                }, 1200);
-            });
-        }
-    </script>
 </body>
 </html>

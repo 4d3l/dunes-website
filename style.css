@@ -157,8 +157,19 @@ code {
 }
 
 /* 4. Ambient Desert Atmosphere */
-.desert-sky {
+.bg-wrapper {
     position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.desert-sky {
+    position: absolute;
     top: 0;
     left: 0;
     width: 100%;
@@ -376,7 +387,7 @@ code {
 .mobile-drawer {
     position: fixed;
     top: 0;
-    right: -100%;
+    right: 0;
     width: 300px;
     height: 100%;
     background: rgba(13, 17, 23, 0.98);
@@ -384,11 +395,12 @@ code {
     border-left: 1px solid var(--color-border);
     z-index: 990;
     padding: 100px 32px 32px;
-    transition: var(--transition-smooth);
+    transform: translateX(100%);
+    transition: transform 0.3s ease-in-out;
 }
 
 .mobile-drawer.active {
-    right: 0;
+    transform: translateX(0);
 }
 
 .mobile-nav {
@@ -820,6 +832,7 @@ code {
     justify-content: center;
     align-items: center;
     height: 380px;
+    overflow: hidden; /* Safeguard: prevents pulsing rings from creating horizontal slack on narrow viewports */
 }
 
 .shield-container {

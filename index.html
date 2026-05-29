@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dunes Chat | Zero Registration. Total Privacy. Secure Messenger.</title>
+    <title>Dunes Chat</title>
     
     <!-- SEO Meta Tags -->
     <meta name="description" content="Dunes is a revolutionary secure messenger that requires no phone number or email to register. End-to-end encrypted messaging, media sharing, and crystal-clear calls.">
@@ -25,8 +25,9 @@
     <meta property="twitter:image" content="https://raw.githubusercontent.com/4d3l/dunes-updates/main/assets/icon.png">
 
     <!-- Favicon & Branding -->
-    <link rel="icon" type="image/png" href="assets/favicon.png">
-    <link rel="apple-touch-icon" href="assets/icon.png">
+    <link rel="icon" type="image/png" href="assets/favicon.png?v=2">
+    <link rel="shortcut icon" type="image/png" href="assets/favicon.png?v=2">
+    <link rel="apple-touch-icon" href="assets/icon.png?v=2">
 
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -39,9 +40,11 @@
 <body>
 
     <!-- Background Desert Atmosphere -->
-    <div class="desert-sky"></div>
-    <div class="ambient-sand-glow"></div>
-    <div class="sand-wind"></div>
+    <div class="bg-wrapper">
+        <div class="desert-sky"></div>
+        <div class="ambient-sand-glow"></div>
+        <div class="sand-wind"></div>
+    </div>
 
     <!-- Header / Navigation Bar -->
     <header class="glass-header" id="navbar">
@@ -92,8 +95,8 @@
                     <span>Dunes v1.16.3 Out Now</span>
                 </div>
                 <h1 class="hero-title animate-slide-up">
-                    Zero Numbers.<br>
-                    Zero Emails.<br>
+                    No Phone Number Required.<br>
+                    No Email Required.<br>
                     <span class="gradient-text">Absolute Privacy.</span>
                 </h1>
                 <p class="hero-subtitle animate-slide-up">
@@ -106,12 +109,7 @@
                         </svg>
                         <span>Download Android APK</span>
                     </a>
-                    <a href="https://github.com/4d3l/dunes" target="_blank" class="btn btn-secondary">
-                        <svg class="icon-svg" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/>
-                        </svg>
-                        <span>Explore Source</span>
-                    </a>
+
                 </div>
                 <div class="hero-stats animate-fade-in">
                     <div class="stat-item">
@@ -318,10 +316,6 @@
                             <span>·</span>
                             <span><strong>Release Date:</strong> May 2026</span>
                         </div>
-                        <div class="release-notes">
-                            <strong>Release Changelog:</strong>
-                            <p>Restore full FCM secure background call wake-ups and resolve background service termination bugs on Xiaomi (MIUI) and Samsung devices. Optimized payload encryption latency.</p>
-                        </div>
                     </div>
 
                     <div class="download-cta-buttons">
@@ -406,17 +400,29 @@
                 </div>
 
                 <!-- FAQ Item 3 -->
+                <!-- FAQ Item 3 (72 hrs data storage necessity) -->
                 <div class="faq-item glass-card">
                     <button class="faq-question">
-                        <span>Can I receive secure notifications or calls when my screen is off?</span>
+                        <span>How are messages delivered if my contact is offline?</span>
                         <span class="faq-icon">+</span>
                     </button>
                     <div class="faq-answer">
-                        <p>Yes. Dunes utilizes high-priority Firebase Cloud Messaging (FCM) silent data packets to securely wake the application process instantly when incoming calls or messages occur. Our latest build <code>v1.16.3</code> explicitly Whitelists the service against aggressive OS background management on Xiaomi (MIUI) and Samsung devices, guaranteeing zero missed calls.</p>
+                        <p>Because Dunes is designed without central databases or permanent profile storage, both devices must ordinarily be online at the same time to establish a direct secure connection. To ensure reliable message delivery when a contact is offline, our relays temporarily store encrypted message envelopes for up to 72 hours. As soon as the recipient reconnects, the encrypted payload is delivered and instantly wiped from the relay servers forever.</p>
                     </div>
                 </div>
 
-                <!-- FAQ Item 4 -->
+                <!-- FAQ Item 4 (Ownership) -->
+                <div class="faq-item glass-card">
+                    <button class="faq-question">
+                        <span>Who built and owns Dunes?</span>
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Dunes was built completely from scratch using AI code generation by a developer who believes that communication must be secure and private.</p>
+                    </div>
+                </div>
+
+                <!-- FAQ Item 5 (Keys storage) -->
                 <div class="faq-item glass-card">
                     <button class="faq-question">
                         <span>Are the encryption keys stored in the cloud?</span>
@@ -424,17 +430,6 @@
                     </button>
                     <div class="faq-answer">
                         <p>Absolutely not. Your private keys never leave your device. They are locked securely inside your operating system's sandbox directory. Even the relay servers that queue and dispatch your encrypted message envelopes cannot read the contents, because they lack the private keys required to resolve the mathematical equation.</p>
-                    </div>
-                </div>
-
-                <!-- FAQ Item 5 -->
-                <div class="faq-item glass-card">
-                    <button class="faq-question">
-                        <span>Is Dunes open source?</span>
-                        <span class="faq-icon">+</span>
-                    </button>
-                    <div class="faq-answer">
-                        <p>Yes. We believe that privacy cannot be proprietary. The entire core code of the client app is open to public inspect. You can view the React Native code, dependency libraries, and cryptographic implementations directly on our GitHub page.</p>
                     </div>
                 </div>
             </div>
