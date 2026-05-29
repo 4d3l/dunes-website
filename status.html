@@ -337,20 +337,6 @@
             </div>
         </div>
 
-        <!-- Live Connection Diagnostics -->
-        <div class="latency-ping-wrapper animate-slide-up" style="animation-delay: 0.2s; grid-template-columns: 1fr;">
-            <div class="latency-card glass-card" style="padding: 28px;">
-                <div>
-                    <span class="latency-name" style="display: block; margin-bottom: 4px; font-size: 1.05rem;">Live Connection Latency</span>
-                    <span style="color: var(--color-text-secondary); font-size: 0.88rem;">Direct round-trip connection speed from your device to the primary Dunes relay network.</span>
-                </div>
-                <div class="latency-val" id="latency-value" style="font-size: 1.3rem; gap: 10px;">
-                    <span class="latency-dot" style="width: 10px; height: 10px;"></span>
-                    <span id="latency-ms">-- ms</span>
-                </div>
-            </div>
-        </div>
-
     </div>
 
     <!-- Footer -->
@@ -372,19 +358,14 @@
             const statusIcon = document.getElementById('status-icon');
             const statusTitle = document.getElementById('status-title');
             const statusText = document.getElementById('status-text');
-            const latencyMs = document.getElementById('latency-ms');
-            const latencyValue = document.getElementById('latency-value');
 
             const healthEndpoint = 'https://dunes-relay-1.onrender.com/health';
-            const startTime = performance.now();
 
             try {
                 // Perform live health fetch
                 const response = await fetch(healthEndpoint, { mode: 'cors', cache: 'no-store' });
                 
                 if (response.ok) {
-                    const duration = Math.round(performance.now() - startTime);
-                    
                     // Update Hero Card to Operational
                     statusCard.className = 'status-hero-card glass-card operational';
                     statusCard.style.borderColor = 'rgba(76, 175, 80, 0.25)';
@@ -399,10 +380,6 @@
                     
                     statusTitle.innerText = 'All Systems Operational';
                     statusText.innerText = 'Relay networks, update hubs, and push wakeup systems are performing optimally with no reported disruptions.';
-                    
-                    // Update Latency Val
-                    latencyMs.innerText = duration + ' ms';
-                    latencyValue.style.color = 'var(--color-online)';
                 } else {
                     throw new Error('Server returned non-OK status');
                 }
@@ -423,10 +400,6 @@
                 
                 statusTitle.innerText = 'Connection Disruption';
                 statusText.innerText = 'Unable to establish a secure handshake with the primary relay network. This may be due to local network firewalls or server maintenance.';
-                
-                // Update Latency Val
-                latencyMs.innerText = 'Offline';
-                latencyValue.style.color = 'var(--color-accent)';
             }
         }
 
