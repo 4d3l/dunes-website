@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dunes Chat | Zero Registration. Total Privacy. Secure Messenger.</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Dunes is a revolutionary secure messenger that requires no phone number or email to register. End-to-end encrypted messaging, media sharing, and crystal-clear calls.">
+    <meta name="keywords" content="dunes, dunes chat, secure messenger, e2ee chat, private messenger, no registration chat, encrypted calls, anonymous messaging">
+    <meta name="author" content="Dunes Team">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://dunes.chat/">
+    <meta property="og:title" content="Dunes Chat | Zero Registration. Absolute Privacy.">
+    <meta property="og:description" content="Discover Dunes: A highly secure, anonymous messaging app with zero personal tracking. Register with absolute anonymity and chat securely.">
+    <meta property="og:image" content="https://raw.githubusercontent.com/4d3l/dunes-updates/main/assets/icon.png">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://dunes.chat/">
+    <meta property="twitter:title" content="Dunes Chat | Zero Registration. Absolute Privacy.">
+    <meta property="twitter:description" content="Discover Dunes: A highly secure, anonymous messaging app with zero personal tracking. Register with absolute anonymity and chat securely.">
+    <meta property="twitter:image" content="https://raw.githubusercontent.com/4d3l/dunes-updates/main/assets/icon.png">
+
+    <!-- Favicon & Branding -->
+    <link rel="icon" type="image/png" href="assets/favicon.png">
+    <link rel="apple-touch-icon" href="assets/icon.png">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Custom Style Sheet -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Background Desert Atmosphere -->
+    <div class="desert-sky"></div>
+    <div class="ambient-sand-glow"></div>
+    <div class="sand-wind"></div>
+
+    <!-- Header / Navigation Bar -->
+    <header class="glass-header" id="navbar">
+        <div class="header-container">
+            <a href="#" class="brand-logo" id="logo-link">
+                <img src="assets/icon.png" alt="Dunes Logo" class="brand-icon">
+                <span class="brand-text">DUNES</span>
+            </a>
+            
+            <nav class="desktop-nav">
+                <a href="#features" class="nav-link">Features</a>
+                <a href="#security" class="nav-link">Security</a>
+                <a href="#simulator" class="nav-link">E2EE Demo</a>
+                <a href="#download" class="nav-link">Download</a>
+                <a href="#faq" class="nav-link">FAQ</a>
+            </nav>
+
+            <div class="header-cta">
+                <a href="#download" class="btn btn-primary btn-sm">Get Dunes</a>
+            </div>
+
+            <button class="mobile-toggle" id="mobile-menu-btn" aria-label="Toggle navigation menu">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </button>
+        </div>
+    </header>
+
+    <!-- Mobile Navigation Drawer -->
+    <div class="mobile-drawer" id="mobile-drawer">
+        <nav class="mobile-nav">
+            <a href="#features" class="mobile-link">Features</a>
+            <a href="#security" class="mobile-link">Security</a>
+            <a href="#simulator" class="mobile-link">E2EE Demo</a>
+            <a href="#download" class="mobile-link">Download</a>
+            <a href="#faq" class="mobile-link">FAQ</a>
+            <a href="#download" class="btn btn-primary mobile-btn">Download APK</a>
+        </nav>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="hero-container">
+            <div class="hero-content">
+                <div class="badge-new animate-fade-in">
+                    <span class="badge-pulse"></span>
+                    <span>Dunes v1.16.3 Out Now</span>
+                </div>
+                <h1 class="hero-title animate-slide-up">
+                    Zero Numbers.<br>
+                    Zero Emails.<br>
+                    <span class="gradient-text">Absolute Privacy.</span>
+                </h1>
+                <p class="hero-subtitle animate-slide-up">
+                    Dunes is a secure messenger built for absolute anonymity. No SIM cards, no SMS confirmations, no tracking. Registration is instant, local, and completely free. Optionally bind an email address only if you wish to reserve a human-readable username.
+                </p>
+                <div class="hero-actions animate-slide-up">
+                    <a href="#download" class="btn btn-primary btn-glow">
+                        <svg class="icon-svg" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
+                        </svg>
+                        <span>Download Android APK</span>
+                    </a>
+                    <a href="https://github.com/4d3l/dunes" target="_blank" class="btn btn-secondary">
+                        <svg class="icon-svg" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/>
+                        </svg>
+                        <span>Explore Source</span>
+                    </a>
+                </div>
+                <div class="hero-stats animate-fade-in">
+                    <div class="stat-item">
+                        <span class="stat-val">100%</span>
+                        <span class="stat-lbl">E2EE Secured</span>
+                    </div>
+                    <div class="stat-divider"></div>
+                    <div class="stat-item">
+                        <span class="stat-val">0</span>
+                        <span class="stat-lbl">Personal Data Collected</span>
+                    </div>
+                    <div class="stat-divider"></div>
+                    <div class="stat-item">
+                        <span class="stat-val">Unlimited</span>
+                        <span class="stat-lbl">Ad-free Secure Chats</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sleek Glassmorphic Floating App Mockup -->
+            <div class="hero-visual animate-fade-in-right">
+                <div class="mockup-frame">
+                    <div class="mockup-header">
+                        <div class="mockup-camera"></div>
+                        <div class="mockup-status-bar">
+                            <span class="mockup-time">9:41</span>
+                            <div class="mockup-indicators">
+                                <span class="mockup-signal"></span>
+                                <span class="mockup-wifi"></span>
+                                <span class="mockup-battery"></span>
+                            </div>
+                        </div>
+                        <div class="mockup-app-bar">
+                            <div class="mockup-app-info">
+                                <div class="mockup-avatar">D</div>
+                                <div>
+                                    <div class="mockup-username">Dunes Chat</div>
+                                    <div class="mockup-online-status">
+                                        <span class="status-dot"></span>
+                                        <span>Fully Secure Session</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mockup-call-icons">
+                                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.94.725l.548 2.2a1 1 0 01-.321.988l-1.305.98a10.582 10.582 0 004.872 4.872l.98-1.305a1 1 0 01.988-.321l2.2.548a1 1 0 01.725.94V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path></svg>
+                                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mockup-chat-area">
+                        <div class="mockup-date">TODAY</div>
+                        
+                        <div class="mock-bubble received">
+                            <p>Wait, is it true that Dunes doesn't ask for my email or phone number? 🤯</p>
+                            <span class="bubble-time">9:42 AM</span>
+                        </div>
+                        
+                        <div class="mock-bubble sent">
+                            <p>Correct! Account keys are generated directly on your device. Zero cloud registration required. 🔒</p>
+                            <span class="bubble-time">9:43 AM · Encrypted</span>
+                        </div>
+
+                        <div class="mock-bubble received">
+                            <p>Wow! So how does discovery work? Can I have a username?</p>
+                            <span class="bubble-time">9:43 AM</span>
+                        </div>
+
+                        <div class="mock-bubble sent">
+                            <p>Yes, you can register an optional email strictly to verify and bind your @username. Completely private! 🌴</p>
+                            <span class="bubble-time">9:44 AM · Encrypted</span>
+                        </div>
+                    </div>
+
+                    <div class="mockup-footer">
+                        <div class="mockup-input">
+                            <span>Write a secure message...</span>
+                        </div>
+                        <button class="mockup-send-btn">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M22 2L11 13M22 2L15 22L11 13M11 13L2 9L22 2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="section features-section" id="features">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Designed for True Sovereignty</h2>
+                <p class="section-desc">Traditional messengers force you to verify identity, exposing your phone metadata, contacts, and personal logs. Dunes resets the paradigm.</p>
+            </div>
+
+            <div class="features-grid">
+                <!-- Card 1 -->
+                <div class="feature-card glass-card">
+                    <div class="feature-icon-wrapper">
+                        <svg class="feature-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
+                        </svg>
+                    </div>
+                    <h3>Device-Centric Registration</h3>
+                    <p>No phone numbers. No email verification checks. Account creation generates local cryptographic key pairs on your device instantly. You start communicating instantly with absolute peace of mind.</p>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="feature-card glass-card">
+                    <div class="feature-icon-wrapper">
+                        <svg class="feature-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 12a4 4 0 10-8 0 4 4 0 008 0zm0 0v1.5a2.5 2.5 0 005 0V12a9 9 0 10-9 9m4.5-1.206a8.959 8.959 0 01-4.5 1.206"></path>
+                        </svg>
+                    </div>
+                    <h3>Optional Username Mapping</h3>
+                    <p>Want your friends to find you easily? Optionally add a verified email address to map a unique <code>@username</code> to your device. The email is cryptographic hash mapped, maintaining your complete privacy.</p>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="feature-card glass-card">
+                    <div class="feature-icon-wrapper">
+                        <svg class="feature-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                        </svg>
+                    </div>
+                    <h3>High Performance Secure Calls</h3>
+                    <p>Fully integrated peer-to-peer secure audio/video calls utilizing instant Firebase Cloud Messaging (FCM) wakeup service. Enjoy low-latency calls that run reliably even on background Doze mode.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Deep-Dive Security Section -->
+    <section class="section security-section" id="security">
+        <div class="container">
+            <div class="security-grid">
+                <div class="security-visual">
+                    <div class="shield-container">
+                        <div class="pulse-ring ring-1"></div>
+                        <div class="pulse-ring ring-2"></div>
+                        <div class="pulse-ring ring-3"></div>
+                        <div class="shield-graphic">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M12 22C12 22 20 18 20 12V5L12 2L4 5V12C4 18 12 22 12 22Z" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M9 11L11 13L15 9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+                <div class="security-content">
+                    <span class="accent-title">Cryptographic Architecture</span>
+                    <h2>Mathematical Sealing of Messages</h2>
+                    <p>Dunes doesn't ask for trust because it relies on zero-trust mathematics. Messages are sealed before they leave your antenna.</p>
+                    
+                    <ul class="security-specs-list">
+                        <li>
+                            <div class="spec-bullet">✓</div>
+                            <div>
+                                <strong>Diffie-Hellman Key Agreement</strong>
+                                <p>Keys are established instantly per conversation, ensuring third-party servers never obtain decrypt options.</p>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="spec-bullet">✓</div>
+                            <div>
+                                <strong>AES-256-GCM Encrypted Payloads</strong>
+                                <p>Every packet, image, and text block is wrapped in symmetric authenticated encryption guarding against tamper attempts.</p>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="spec-bullet">✓</div>
+                            <div>
+                                <strong>Zero Metadata Trails</strong>
+                                <p>Server only acts as an encrypted buffer pipeline. Since no profiles are bound to phone numbers, correlation profiling is impossible.</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Interactive E2EE Simulator Section -->
+    <section class="section simulator-section" id="simulator">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">See E2EE In Real-Time</h2>
+                <p class="section-desc">Try our interactive simulator below to see exactly how your raw message is converted into impenetrable cipher before routing through servers.</p>
+            </div>
+
+            <div class="simulator-wrapper glass-card">
+                <div class="sim-pane sim-input-pane">
+                    <label for="plain-input">Step 1: Write Private Message</label>
+                    <textarea id="plain-input" placeholder="Type something private here...">Meet me at the oasis 🌴. Bring the encryption keys!</textarea>
+                    <div class="pane-footer">
+                        <span id="char-counter">53 characters</span>
+                    </div>
+                </div>
+
+                <div class="sim-controls">
+                    <div class="sim-status" id="sim-status">
+                        <span class="status-dot pulsing"></span>
+                        <span id="status-text">Idle & Ready</span>
+                    </div>
+                    <button class="btn btn-primary btn-sm" id="btn-encrypt-toggle">Encrypt Payload</button>
+                    <div class="sim-keys-display">
+                        <span class="key-lbl">Shared DH Key (Device-Local):</span>
+                        <code id="sim-key-val">dune_dh_7a8f90c...</code>
+                    </div>
+                </div>
+
+                <div class="sim-pane sim-output-pane">
+                    <label>Step 2: Network-Transit Ciphertext</label>
+                    <div class="cipher-box" id="cipher-output">
+                        U2FsdGVkX19P208hZ4JkI+Yt8H7tq1ZtN398f8A+eQ2YcM4bS63K7q9...
+                    </div>
+                    <div class="pane-footer flex-between">
+                        <span class="badge badge-success" id="security-badge">Encrypted (AES-GCM)</span>
+                        <button class="btn-text" id="btn-copy-cipher">Copy Cipher</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- App Download Hub -->
+    <section class="section download-section" id="download">
+        <div class="container">
+            <div class="download-grid">
+                <div class="download-info">
+                    <span class="accent-title">Secure Sideload</span>
+                    <h2>Download Dunes</h2>
+                    <p>Because privacy apps often face arbitrary censorship on major app stores, we distribute the secure Dunes client as an independent direct APK. Instantly get the authentic, untouched binary straight from our build repository.</p>
+                    
+                    <div class="release-card glass-card">
+                        <div class="release-main-info">
+                            <span class="release-tag">Latest Stable</span>
+                            <span class="release-version">v1.16.3</span>
+                        </div>
+                        <div class="release-metadata">
+                            <span><strong>Size:</strong> 68.5 MB</span>
+                            <span>·</span>
+                            <span><strong>Target OS:</strong> Android 8.0+</span>
+                            <span>·</span>
+                            <span><strong>Release Date:</strong> May 2026</span>
+                        </div>
+                        <div class="release-notes">
+                            <strong>Release Changelog:</strong>
+                            <p>Restore full FCM secure background call wake-ups and resolve background service termination bugs on Xiaomi (MIUI) and Samsung devices. Optimized payload encryption latency.</p>
+                        </div>
+                    </div>
+
+                    <div class="download-cta-buttons">
+                        <a href="https://raw.githubusercontent.com/4d3l/dunes-updates/main/dunes_v1.16.3.apk" class="btn btn-primary btn-lg btn-glow">
+                            <svg class="icon-svg" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+                            <span>Download APK (v1.16.3)</span>
+                        </a>
+                        <button class="btn btn-secondary btn-lg" id="btn-sideload-guide">
+                            <span>Sideload Guide</span>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="download-instructions glass-card" id="sideload-guide-card">
+                    <h3>How to Sideload the Dunes APK</h3>
+                    <p class="guide-intro">Installing a direct APK on Android is safe and takes under 30 seconds. Follow these quick steps:</p>
+                    
+                    <ol class="step-list">
+                        <li>
+                            <div class="step-num">1</div>
+                            <div>
+                                <h4>Download the APK file</h4>
+                                <p>Click the primary download button to save the <code>dunes_v1.16.3.apk</code> binary to your device.</p>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="step-num">2</div>
+                            <div>
+                                <h4>Open File Manager / Download</h4>
+                                <p>Tap on the downloaded file in your notification bar or browse to your Downloads folder and tap the file.</p>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="step-num">3</div>
+                            <div>
+                                <h4>Allow Unknown Sources (If Prompted)</h4>
+                                <p>If Android prompts you with a security message, click <strong>Settings</strong> and toggle on <em>"Allow from this source"</em> for your browser or file manager.</p>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="step-num">4</div>
+                            <div>
+                                <h4>Finish Installation & Chat!</h4>
+                                <p>Tap <strong>Install</strong>, open Dunes, and generate your keys! No SMS codes required.</p>
+                            </div>
+                        </li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Accordions Section -->
+    <section class="section faq-section" id="faq">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Frequently Answered Truths</h2>
+                <p class="section-desc">Have questions about the technical structure, username claiming, or server mechanics? Let's clarify.</p>
+            </div>
+
+            <div class="faq-container">
+                <!-- FAQ Item 1 -->
+                <div class="faq-item glass-card">
+                    <button class="faq-question">
+                        <span>How is it possible to register without a phone number or email?</span>
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Dunes shifts identity verification from central servers to cryptography. When you launch the app, a local keypair (public and private keys) is generated directly on your mobile hardware. Your public key acts as your secure address. Servers do not need to register your telephone card or verify email accounts because your device is its own authority.</p>
+                    </div>
+                </div>
+
+                <!-- FAQ Item 2 -->
+                <div class="faq-item glass-card">
+                    <button class="faq-question">
+                        <span>How does the optional email username mapping work?</span>
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>If you wish to secure a readable handle (e.g. <code>@sandy</code>), you can optionally provide an email address. Dunes performs a secure cryptographic hashing process on your email to register the username link in our database. Your raw email address is never saved in plaintext on servers, protecting you from identity correlation breaches.</p>
+                    </div>
+                </div>
+
+                <!-- FAQ Item 3 -->
+                <div class="faq-item glass-card">
+                    <button class="faq-question">
+                        <span>Can I receive secure notifications or calls when my screen is off?</span>
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Yes. Dunes utilizes high-priority Firebase Cloud Messaging (FCM) silent data packets to securely wake the application process instantly when incoming calls or messages occur. Our latest build <code>v1.16.3</code> explicitly Whitelists the service against aggressive OS background management on Xiaomi (MIUI) and Samsung devices, guaranteeing zero missed calls.</p>
+                    </div>
+                </div>
+
+                <!-- FAQ Item 4 -->
+                <div class="faq-item glass-card">
+                    <button class="faq-question">
+                        <span>Are the encryption keys stored in the cloud?</span>
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Absolutely not. Your private keys never leave your device. They are locked securely inside your operating system's sandbox directory. Even the relay servers that queue and dispatch your encrypted message envelopes cannot read the contents, because they lack the private keys required to resolve the mathematical equation.</p>
+                    </div>
+                </div>
+
+                <!-- FAQ Item 5 -->
+                <div class="faq-item glass-card">
+                    <button class="faq-question">
+                        <span>Is Dunes open source?</span>
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Yes. We believe that privacy cannot be proprietary. The entire core code of the client app is open to public inspect. You can view the React Native code, dependency libraries, and cryptographic implementations directly on our GitHub page.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-top">
+                <div class="footer-brand">
+                    <a href="#" class="brand-logo">
+                        <img src="assets/icon.png" alt="Dunes Logo" class="brand-icon">
+                        <span class="brand-text">DUNES</span>
+                    </a>
+                    <p>Redefining absolute mobile communication privacy through device-centric cryptography.</p>
+                </div>
+                <div class="footer-links">
+                    <div class="link-group">
+                        <h4>Navigation</h4>
+                        <a href="#features">Features</a>
+                        <a href="#security">Security Core</a>
+                        <a href="#simulator">E2EE Demo</a>
+                        <a href="#download">Download APK</a>
+                    </div>
+                    <div class="link-group">
+                        <h4>Resources</h4>
+                        <a href="https://github.com/4d3l/dunes" target="_blank">GitHub Repository</a>
+                        <a href="https://github.com/4d3l/dunes-updates" target="_blank">Releases & Updates</a>
+                        <a href="https://raw.githubusercontent.com/4d3l/dunes-updates/main/dunes_v1.16.3.apk">Direct APK Link</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Dunes Chat. All rights reserved. Host server coordinates: <code>dunes.chat</code></p>
+                <div class="footer-meta">
+                    <span class="status-dot"></span>
+                    <span>All Relay Networks Operational</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Core Javascript Code -->
+    <script src="script.js"></script>
+</body>
+</html>
