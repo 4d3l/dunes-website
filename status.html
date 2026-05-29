@@ -325,15 +325,15 @@
         </div>
 
         <!-- Overall Hero Box -->
-        <div class="status-hero-card glass-card operational animate-slide-up">
-            <div class="status-large-icon">
+        <div class="status-hero-card glass-card operational animate-slide-up" id="status-card">
+            <div class="status-large-icon" id="status-icon" style="transition: all 0.3s ease;">
                 <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                 </svg>
             </div>
             <div class="status-title-info">
-                <h1>All Systems Operational</h1>
-                <p>Relay networks, update hubs, and push wakeup systems are performing optimally with no reported disruptions.</p>
+                <h1 id="status-title">Checking System Status...</h1>
+                <p id="status-text">Performing a live connection handshake with the primary Dunes relay network...</p>
             </div>
         </div>
 
@@ -411,8 +411,29 @@
 
             <div class="uptime-meta-labels">
                 <span>7 Days Ago</span>
-                <span>Relay Latency: ~14ms Avg</span>
+                <span>Global Uptime Audit</span>
                 <span>Active Status</span>
+            </div>
+        </div>
+
+        <!-- Live Connection Diagnostics & Detailed History Link -->
+        <div class="latency-ping-wrapper animate-slide-up" style="animation-delay: 0.25s;">
+            <div class="latency-card glass-card">
+                <div>
+                    <span class="latency-name" style="display: block; margin-bottom: 4px;">Live Connection Latency</span>
+                    <span style="color: var(--color-text-secondary); font-size: 0.85rem;">Your device round-trip ping to the Dunes relay cluster.</span>
+                </div>
+                <div class="latency-val" id="latency-value">
+                    <span class="latency-dot"></span>
+                    <span id="latency-ms">-- ms</span>
+                </div>
+            </div>
+            <div class="latency-card glass-card" style="display: flex; flex-direction: column; align-items: flex-start; justify-content: center; gap: 8px;">
+                <span class="latency-name">Complete Uptime Logs</span>
+                <span style="color: var(--color-text-secondary); font-size: 0.85rem; margin-bottom: 4px;">Access the independent, third-party 7-day server audit log.</span>
+                <a href="https://status.dunes.chat" target="_blank" class="btn btn-secondary btn-sm" style="align-self: flex-start; padding: 6px 14px; font-size: 0.85rem;">
+                    <span>View 7-Day History →</span>
+                </a>
             </div>
         </div>
 
@@ -430,5 +451,73 @@
             </div>
         </div>
     </footer>
+    <!-- Real-time Live Connection Script -->
+    <script>
+        async function checkRelayStatus() {
+            const statusCard = document.getElementById('status-card');
+            const statusIcon = document.getElementById('status-icon');
+            const statusTitle = document.getElementById('status-title');
+            const statusText = document.getElementById('status-text');
+            const latencyMs = document.getElementById('latency-ms');
+            const latencyValue = document.getElementById('latency-value');
+
+            const healthEndpoint = 'https://dunes-relay-1.onrender.com/health';
+            const startTime = performance.now();
+
+            try {
+                // Perform live health fetch
+                const response = await fetch(healthEndpoint, { mode: 'cors', cache: 'no-store' });
+                
+                if (response.ok) {
+                    const duration = Math.round(performance.now() - startTime);
+                    
+                    // Update Hero Card to Operational
+                    statusCard.className = 'status-hero-card glass-card operational';
+                    statusCard.style.borderColor = 'rgba(76, 175, 80, 0.25)';
+                    statusIcon.innerHTML = `
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                        </svg>
+                    `;
+                    statusIcon.style.color = 'var(--color-online)';
+                    statusIcon.style.background = 'rgba(76, 175, 80, 0.1)';
+                    statusIcon.style.border = '1px solid rgba(76, 175, 80, 0.3)';
+                    
+                    statusTitle.innerText = 'All Systems Operational';
+                    statusText.innerText = 'Relay networks, update hubs, and push wakeup systems are performing optimally with no reported disruptions.';
+                    
+                    // Update Latency Val
+                    latencyMs.innerText = duration + ' ms';
+                    latencyValue.style.color = 'var(--color-online)';
+                } else {
+                    throw new Error('Server returned non-OK status');
+                }
+            } catch (error) {
+                console.error('[Live Status] Check failed:', error);
+                
+                // Update Hero Card to Outage
+                statusCard.className = 'status-hero-card glass-card';
+                statusCard.style.borderColor = 'rgba(232, 114, 42, 0.3)';
+                statusIcon.innerHTML = `
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path>
+                    </svg>
+                `;
+                statusIcon.style.color = 'var(--color-accent)';
+                statusIcon.style.background = 'rgba(232, 114, 42, 0.1)';
+                statusIcon.style.border = '1px solid rgba(232, 114, 42, 0.3)';
+                
+                statusTitle.innerText = 'Connection Disruption';
+                statusText.innerText = 'Unable to establish a secure handshake with the primary relay network. This may be due to local network firewalls or server maintenance.';
+                
+                // Update Latency Val
+                latencyMs.innerText = 'Offline';
+                latencyValue.style.color = 'var(--color-accent)';
+            }
+        }
+
+        // Run check on load
+        window.addEventListener('DOMContentLoaded', checkRelayStatus);
+    </script>
 </body>
 </html>
