@@ -337,103 +337,17 @@
             </div>
         </div>
 
-        <!-- 7-Day Performance Section -->
-        <div class="status-section-card glass-card animate-slide-up" style="animation-delay: 0.15s;">
-            <h3>
-                <span>Relay Cluster Performance</span>
-                <span class="system-overall-percent">99.98% Uptime (Past 7 Days)</span>
-            </h3>
-
-            <div class="uptime-bars-grid">
-                <!-- Day 1 (7 days ago) -->
-                <div class="uptime-day-col">
-                    <div class="uptime-tooltip">May 23: 100% Uptime (0 incidents)</div>
-                    <div class="uptime-bar">
-                        <div class="uptime-fill" style="height: 100%;"></div>
-                    </div>
-                    <span class="uptime-day-label">May 23</span>
-                </div>
-
-                <!-- Day 2 -->
-                <div class="uptime-day-col">
-                    <div class="uptime-tooltip">May 24: 100% Uptime (0 incidents)</div>
-                    <div class="uptime-bar">
-                        <div class="uptime-fill" style="height: 100%;"></div>
-                    </div>
-                    <span class="uptime-day-label">May 24</span>
-                </div>
-
-                <!-- Day 3 -->
-                <div class="uptime-day-col">
-                    <div class="uptime-tooltip">May 25: 100% Uptime (0 incidents)</div>
-                    <div class="uptime-bar">
-                        <div class="uptime-fill" style="height: 100%;"></div>
-                    </div>
-                    <span class="uptime-day-label">May 25</span>
-                </div>
-
-                <!-- Day 4 -->
-                <div class="uptime-day-col">
-                    <div class="uptime-tooltip">May 26: 99.88% Uptime (2m server switch)</div>
-                    <div class="uptime-bar">
-                        <div class="uptime-fill warning" style="height: 98%;"></div>
-                    </div>
-                    <span class="uptime-day-label">May 26</span>
-                </div>
-
-                <!-- Day 5 -->
-                <div class="uptime-day-col">
-                    <div class="uptime-tooltip">May 27: 100% Uptime (0 incidents)</div>
-                    <div class="uptime-bar">
-                        <div class="uptime-fill" style="height: 100%;"></div>
-                    </div>
-                    <span class="uptime-day-label">May 27</span>
-                </div>
-
-                <!-- Day 6 -->
-                <div class="uptime-day-col">
-                    <div class="uptime-tooltip">May 28: 100% Uptime (0 incidents)</div>
-                    <div class="uptime-bar">
-                        <div class="uptime-fill" style="height: 100%;"></div>
-                    </div>
-                    <span class="uptime-day-label">May 28</span>
-                </div>
-
-                <!-- Day 7 (Today) -->
-                <div class="uptime-day-col">
-                    <div class="uptime-tooltip">Today: 100% Uptime (All Systems Active)</div>
-                    <div class="uptime-bar">
-                        <div class="uptime-fill" style="height: 100%;"></div>
-                    </div>
-                    <span class="uptime-day-label">Today</span>
-                </div>
-            </div>
-
-            <div class="uptime-meta-labels">
-                <span>7 Days Ago</span>
-                <span>Global Uptime Audit</span>
-                <span>Active Status</span>
-            </div>
-        </div>
-
-        <!-- Live Connection Diagnostics & Detailed History Link -->
-        <div class="latency-ping-wrapper animate-slide-up" style="animation-delay: 0.25s;">
-            <div class="latency-card glass-card">
+        <!-- Live Connection Diagnostics -->
+        <div class="latency-ping-wrapper animate-slide-up" style="animation-delay: 0.2s; grid-template-columns: 1fr;">
+            <div class="latency-card glass-card" style="padding: 28px;">
                 <div>
-                    <span class="latency-name" style="display: block; margin-bottom: 4px;">Live Connection Latency</span>
-                    <span style="color: var(--color-text-secondary); font-size: 0.85rem;">Your device round-trip ping to the Dunes relay cluster.</span>
+                    <span class="latency-name" style="display: block; margin-bottom: 4px; font-size: 1.05rem;">Live Connection Latency</span>
+                    <span style="color: var(--color-text-secondary); font-size: 0.88rem;">Direct round-trip connection speed from your device to the primary Dunes relay network.</span>
                 </div>
-                <div class="latency-val" id="latency-value">
-                    <span class="latency-dot"></span>
+                <div class="latency-val" id="latency-value" style="font-size: 1.3rem; gap: 10px;">
+                    <span class="latency-dot" style="width: 10px; height: 10px;"></span>
                     <span id="latency-ms">-- ms</span>
                 </div>
-            </div>
-            <div class="latency-card glass-card" style="display: flex; flex-direction: column; align-items: flex-start; justify-content: center; gap: 8px;">
-                <span class="latency-name">Complete Uptime Logs</span>
-                <span style="color: var(--color-text-secondary); font-size: 0.85rem; margin-bottom: 4px;">Access the independent, third-party 7-day server audit log.</span>
-                <a href="https://status.dunes.chat" target="_blank" class="btn btn-secondary btn-sm" style="align-self: flex-start; padding: 6px 14px; font-size: 0.85rem;">
-                    <span>View 7-Day History →</span>
-                </a>
             </div>
         </div>
 
