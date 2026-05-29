@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privacy Policy | Dunes Chat</title>
+
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Dunes Chat Privacy Policy — Learn how Dunes protects your data with end-to-end encryption, zero tracking, and minimal data collection. No phone number or email required.">
+    <meta name="keywords" content="dunes privacy policy, dunes chat privacy, secure messenger privacy, e2ee privacy, anonymous messaging policy">
+    <meta name="author" content="Dunes Team">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://dunes.chat/privacy.html">
+    <meta property="og:title" content="Privacy Policy | Dunes Chat">
+    <meta property="og:description" content="Learn how Dunes protects your privacy with zero tracking, end-to-end encryption, and minimal data collection.">
+    <meta property="og:image" content="https://raw.githubusercontent.com/4d3l/dunes-updates/main/assets/icon.png">
+
+    <!-- Favicon & Branding -->
+    <link rel="icon" type="image/png" href="favicon.png?v=3">
+    <link rel="icon" type="image/x-icon" href="favicon.ico?v=3">
+    <link rel="shortcut icon" type="image/x-icon" href="favicon.ico?v=3">
+    <link rel="apple-touch-icon" href="assets/icon.png?v=3">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Custom Style Sheet -->
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Privacy Policy Page-Specific Styles */
+        .privacy-container {
+            max-width: 820px;
+            margin: 140px auto 100px;
+            padding: 0 24px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .privacy-header-box {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 32px;
+        }
+
+        .back-link {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--color-text-secondary);
+            font-weight: 500;
+            font-size: 0.95rem;
+        }
+
+        .back-link:hover {
+            color: var(--color-accent);
+        }
+
+        .privacy-hero-card {
+            padding: 48px;
+            margin-bottom: 40px;
+            background: linear-gradient(135deg, rgba(22, 27, 34, 0.8) 0%, rgba(13, 17, 23, 0.6) 100%);
+            box-shadow: var(--glass-shadow), 0 0 30px rgba(245, 166, 35, 0.04);
+            border-color: rgba(245, 166, 35, 0.15);
+        }
+
+        .privacy-hero-card .shield-icon {
+            width: 64px;
+            height: 64px;
+            background: rgba(245, 166, 35, 0.08);
+            border: 1px solid rgba(245, 166, 35, 0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--color-accent);
+            margin-bottom: 24px;
+            box-shadow: var(--glow-amber);
+        }
+
+        .privacy-hero-card .shield-icon svg {
+            width: 32px;
+            height: 32px;
+        }
+
+        .privacy-hero-card h1 {
+            font-size: 2.2rem;
+            margin-bottom: 12px;
+            background: linear-gradient(180deg, #FFFFFF 0%, #CBD5E1 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .privacy-hero-card .effective-date {
+            color: var(--color-text-secondary);
+            font-size: 0.95rem;
+        }
+
+        .privacy-hero-card .effective-date strong {
+            color: var(--color-accent-light);
+        }
+
+        .privacy-intro {
+            color: var(--color-text-secondary);
+            font-size: 1.05rem;
+            line-height: 1.7;
+            margin-top: 20px;
+        }
+
+        /* Policy Section Cards */
+        .policy-section {
+            margin-bottom: 24px;
+            padding: 36px;
+        }
+
+        .policy-section-number {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 32px;
+            height: 32px;
+            background: var(--color-accent-gradient);
+            border-radius: 50%;
+            color: #000;
+            font-family: var(--font-heading);
+            font-weight: 800;
+            font-size: 0.9rem;
+            flex-shrink: 0;
+            box-shadow: var(--glow-amber);
+            margin-bottom: 16px;
+        }
+
+        .policy-section h2 {
+            font-size: 1.5rem;
+            margin-bottom: 16px;
+            color: var(--color-text-primary);
+        }
+
+        .policy-section p {
+            color: var(--color-text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.7;
+            margin-bottom: 12px;
+        }
+
+        .policy-section p:last-child {
+            margin-bottom: 0;
+        }
+
+        .policy-section ul {
+            list-style: none;
+            padding: 0;
+            margin: 16px 0;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .policy-section ul li {
+            display: flex;
+            gap: 12px;
+            align-items: flex-start;
+            color: var(--color-text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .policy-section ul li .bullet-icon {
+            flex-shrink: 0;
+            width: 22px;
+            height: 22px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 2px;
+        }
+
+        .bullet-collect {
+            color: var(--color-accent);
+            font-weight: 700;
+            font-size: 0.9rem;
+        }
+
+        .bullet-no {
+            color: var(--color-online);
+            font-weight: 700;
+            font-size: 1rem;
+        }
+
+        .bullet-check {
+            color: var(--color-online);
+            font-weight: 700;
+            font-size: 0.95rem;
+        }
+
+        .policy-highlight-box {
+            background: rgba(245, 166, 35, 0.04);
+            border: 1px solid rgba(245, 166, 35, 0.12);
+            border-radius: 10px;
+            padding: 18px 20px;
+            margin: 16px 0;
+        }
+
+        .policy-highlight-box p {
+            color: var(--color-accent-light);
+            font-size: 0.9rem;
+            margin-bottom: 0;
+        }
+
+        .policy-highlight-box.green {
+            background: rgba(76, 175, 80, 0.04);
+            border-color: rgba(76, 175, 80, 0.12);
+        }
+
+        .policy-highlight-box.green p {
+            color: var(--color-online);
+        }
+
+        .contact-link {
+            color: var(--color-accent);
+            font-weight: 600;
+        }
+
+        .contact-link:hover {
+            color: var(--color-accent-light);
+            text-shadow: 0 0 8px rgba(245, 166, 35, 0.3);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .privacy-container {
+                margin: 100px auto 60px;
+            }
+
+            .privacy-hero-card {
+                padding: 32px 24px;
+            }
+
+            .privacy-hero-card h1 {
+                font-size: 1.7rem;
+            }
+
+            .policy-section {
+                padding: 28px 20px;
+            }
+
+            .policy-section h2 {
+                font-size: 1.25rem;
+            }
+
+            .privacy-header-box {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Background Desert Atmosphere -->
+    <div class="bg-wrapper">
+        <div class="desert-sky"></div>
+        <div class="ambient-sand-glow"></div>
+    </div>
+
+    <!-- Header / Navigation Bar -->
+    <header class="glass-header" id="navbar">
+        <div class="header-container">
+            <a href="index.html" class="brand-logo">
+                <img src="assets/icon.png" alt="Dunes Logo" class="brand-icon">
+                <span class="brand-text">DUNES</span>
+            </a>
+            
+            <nav class="desktop-nav">
+                <a href="index.html#features" class="nav-link">Features</a>
+                <a href="index.html#security" class="nav-link">Security</a>
+                <a href="status.html" class="nav-link">Status</a>
+                <a href="index.html#download" class="nav-link">Download</a>
+                <a href="privacy.html" class="nav-link" style="color: var(--color-accent-light);">Privacy</a>
+            </nav>
+
+            <div class="header-cta">
+                <a href="index.html#download" class="btn btn-primary btn-sm">Get Dunes</a>
+            </div>
+
+            <button class="mobile-toggle" id="mobile-menu-btn" aria-label="Toggle navigation menu">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </button>
+        </div>
+    </header>
+
+    <!-- Mobile Navigation Drawer -->
+    <div class="mobile-drawer" id="mobile-drawer">
+        <nav class="mobile-nav">
+            <a href="index.html#features" class="mobile-link">Features</a>
+            <a href="index.html#security" class="mobile-link">Security</a>
+            <a href="status.html" class="mobile-link">Status</a>
+            <a href="index.html#download" class="mobile-link">Download</a>
+            <a href="privacy.html" class="mobile-link" style="color: var(--color-accent-light);">Privacy Policy</a>
+            <a href="index.html#download" class="btn btn-primary mobile-btn">Download APK</a>
+        </nav>
+    </div>
+
+    <!-- Main Privacy Policy Content -->
+    <div class="privacy-container">
+
+        <div class="privacy-header-box">
+            <a href="index.html" class="back-link">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="19" y1="12" x2="5" y2="12"></line>
+                    <polyline points="12 19 5 12 12 5"></polyline>
+                </svg>
+                <span>Back to dunes.chat</span>
+            </a>
+            <span class="badge badge-success" style="font-size: 0.8rem; padding: 6px 14px;">Zero Tracking</span>
+        </div>
+
+        <!-- Hero Card -->
+        <div class="privacy-hero-card glass-card animate-slide-up">
+            <div class="shield-icon">
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 22C12 22 20 18 20 12V5L12 2L4 5V12C4 18 12 22 12 22Z" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M9 11L11 13L15 9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </div>
+            <h1>Privacy Policy</h1>
+            <p class="effective-date"><strong>Effective Date:</strong> May 29, 2026</p>
+            <p class="privacy-intro">
+                Dunes is a secure peer-to-peer messenger built on the principle that private communication is a fundamental right. This Privacy Policy explains exactly what data Dunes collects, what it does not collect, and how any collected data is handled. Our commitment is simple: <strong style="color: var(--color-accent-light);">collect as little as possible, encrypt everything, and never sell your data.</strong>
+            </p>
+        </div>
+
+        <!-- Section 1: Information We Collect -->
+        <div class="policy-section glass-card" id="section-collect">
+            <div class="policy-section-number">1</div>
+            <h2>Information We Collect</h2>
+            <p>Dunes is designed to collect the absolute minimum amount of data necessary to deliver secure messaging. Here is an exhaustive list of what we process:</p>
+            <ul>
+                <li>
+                    <span class="bullet-icon bullet-collect">●</span>
+                    <span><strong>Public Identity Keys</strong> — When you create a Dunes account, an X25519 keypair is generated locally on your device. Only the <em>public key</em> is shared with the relay server to enable message routing. Your private key never leaves your device.</span>
+                </li>
+                <li>
+                    <span class="bullet-icon bullet-collect">●</span>
+                    <span><strong>Optional Hashed Email</strong> — If you choose to claim a human-readable <code>@username</code>, you may provide an email address for verification. This email is stored <em>only as a cryptographic hash</em> on the relay server. Your raw email address is never saved in plaintext.</span>
+                </li>
+                <li>
+                    <span class="bullet-icon bullet-collect">●</span>
+                    <span><strong>Firebase Cloud Messaging (FCM) Token</strong> — A device push notification token is registered to deliver wake-up signals when someone sends you a message. This token contains no personal information and is used solely for push delivery.</span>
+                </li>
+            </ul>
+            <div class="policy-highlight-box">
+                <p>⚡ That's it. Three data points — public key, optional hashed email, and FCM token — are the <em>only</em> pieces of information the Dunes relay server ever handles.</p>
+            </div>
+        </div>
+
+        <!-- Section 2: Information We Do NOT Collect -->
+        <div class="policy-section glass-card" id="section-no-collect">
+            <div class="policy-section-number">2</div>
+            <h2>Information We Do NOT Collect</h2>
+            <p>Dunes is built to prove that a messenger can function without harvesting personal data. We do <strong>not</strong> collect, store, or process any of the following:</p>
+            <ul>
+                <li>
+                    <span class="bullet-icon bullet-no">✕</span>
+                    <span>Phone numbers or SIM card data</span>
+                </li>
+                <li>
+                    <span class="bullet-icon bullet-no">✕</span>
+                    <span>Device contacts or address book entries</span>
+                </li>
+                <li>
+                    <span class="bullet-icon bullet-no">✕</span>
+                    <span>Location data, GPS coordinates, or IP-based geolocation</span>
+                </li>
+                <li>
+                    <span class="bullet-icon bullet-no">✕</span>
+                    <span>Browsing history, search queries, or app usage analytics</span>
+                </li>
+                <li>
+                    <span class="bullet-icon bullet-no">✕</span>
+                    <span>Camera roll, photos, or files (unless explicitly sent as a message)</span>
+                </li>
+                <li>
+                    <span class="bullet-icon bullet-no">✕</span>
+                    <span>Device identifiers, IMEI, or advertising IDs</span>
+                </li>
+                <li>
+                    <span class="bullet-icon bullet-no">✕</span>
+                    <span>Telemetry, diagnostics, or crash reports</span>
+                </li>
+                <li>
+                    <span class="bullet-icon bullet-no">✕</span>
+                    <span>Message contents (all messages are end-to-end encrypted)</span>
+                </li>
+            </ul>
+            <div class="policy-highlight-box green">
+                <p>🛡️ Dunes runs zero analytics, zero tracking pixels, zero telemetry, and zero advertisements. There is nothing to opt out of because there is nothing being collected.</p>
+            </div>
+        </div>
+
+        <!-- Section 3: How We Use Information -->
+        <div class="policy-section glass-card" id="section-use">
+            <div class="policy-section-number">3</div>
+            <h2>How We Use Information</h2>
+            <p>The minimal data we process serves exactly two operational purposes:</p>
+            <ul>
+                <li>
+                    <span class="bullet-icon bullet-check">✓</span>
+                    <span><strong>Relay Signaling</strong> — Your public key is used to route encrypted message envelopes between peers. The relay server acts as a temporary buffer, forwarding sealed packets it cannot decrypt.</span>
+                </li>
+                <li>
+                    <span class="bullet-icon bullet-check">✓</span>
+                    <span><strong>Push Notifications</strong> — FCM tokens are used to send silent wake-up signals to your device when a new message arrives. These push notifications contain <em>no message content</em> — they simply tell the app to connect and retrieve waiting messages.</span>
+                </li>
+            </ul>
+            <p>We do not use any collected data for profiling, advertising, recommendation algorithms, or any purpose beyond the two listed above.</p>
+        </div>
+
+        <!-- Section 4: Data Storage & Retention -->
+        <div class="policy-section glass-card" id="section-storage">
+            <div class="policy-section-number">4</div>
+            <h2>Data Storage & Retention</h2>
+            <p>Dunes follows a strict data minimization and ephemeral storage model:</p>
+            <ul>
+                <li>
+                    <span class="bullet-icon bullet-check">✓</span>
+                    <span><strong>Encrypted Signaling Messages</strong> — Buffered in relay server memory for a maximum of <strong>15 minutes</strong>. Once delivered or expired, they are permanently and irrecoverably deleted.</span>
+                </li>
+                <li>
+                    <span class="bullet-icon bullet-check">✓</span>
+                    <span><strong>Encrypted Media Files</strong> — Stored on the relay server for up to <strong>72 hours</strong>. Files are automatically deleted after the recipient downloads them or upon expiry — whichever comes first.</span>
+                </li>
+                <li>
+                    <span class="bullet-icon bullet-check">✓</span>
+                    <span><strong>Messages & Chat History</strong> — Stored <em>only on your local device</em>. Dunes has no cloud database of conversations. If you delete the app or factory reset, your messages are gone forever.</span>
+                </li>
+                <li>
+                    <span class="bullet-icon bullet-check">✓</span>
+                    <span><strong>Contact List</strong> — Stored exclusively on your device's local storage. Never uploaded or synchronized with any server.</span>
+                </li>
+                <li>
+                    <span class="bullet-icon bullet-check">✓</span>
+                    <span><strong>Identity Keys</strong> — Your private keys (X25519) are generated and stored locally inside your device's sandboxed application directory. They never leave the device.</span>
+                </li>
+            </ul>
+            <div class="policy-highlight-box">
+                <p>🔐 All data in transit is sealed with XSalsa20-Poly1305 authenticated encryption. The relay server sees only encrypted ciphertext — it cannot read, analyze, or extract message contents.</p>
+            </div>
+        </div>
+
+        <!-- Section 5: Third-Party Services -->
+        <div class="policy-section glass-card" id="section-third-party">
+            <div class="policy-section-number">5</div>
+            <h2>Third-Party Services</h2>
+            <p>Dunes uses exactly one third-party service:</p>
+            <ul>
+                <li>
+                    <span class="bullet-icon bullet-check">✓</span>
+                    <span><strong>Firebase Cloud Messaging (FCM)</strong> — Provided by Google, FCM is used solely for delivering silent push notification wake-up signals to your device. These signals contain <em>no message content, no metadata, and no personal information.</em> They simply instruct your device to connect to the relay to check for waiting messages.</span>
+                </li>
+            </ul>
+            <p>FCM is governed by <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer" class="contact-link">Google's Privacy Policy</a>. No other third-party analytics, advertising, or tracking services are integrated into Dunes.</p>
+            <p>We do <strong>not</strong> sell, share, trade, or otherwise transfer your personal data to any third party, under any circumstances.</p>
+        </div>
+
+        <!-- Section 6: Children's Privacy -->
+        <div class="policy-section glass-card" id="section-children">
+            <div class="policy-section-number">6</div>
+            <h2>Children's Privacy</h2>
+            <p>Dunes is not intended for use by individuals under the age of 13. We do not knowingly collect personal information from children under 13. If you are a parent or guardian and believe your child has provided us with personal information, please contact us at <a href="mailto:privacy@dunes.chat" class="contact-link">privacy@dunes.chat</a> and we will take immediate steps to remove that information.</p>
+            <p>Given that Dunes does not collect personal data during registration, the risk of inadvertent child data collection is inherently minimal.</p>
+        </div>
+
+        <!-- Section 7: User Rights -->
+        <div class="policy-section glass-card" id="section-rights">
+            <div class="policy-section-number">7</div>
+            <h2>User Rights</h2>
+            <p>As a Dunes user, you have full control over your data and interactions:</p>
+            <ul>
+                <li>
+                    <span class="bullet-icon bullet-check">✓</span>
+                    <span><strong>Block Users</strong> — You can block any user at any time to prevent them from sending you messages or initiating calls.</span>
+                </li>
+                <li>
+                    <span class="bullet-icon bullet-check">✓</span>
+                    <span><strong>Report Users</strong> — You can report abusive or harmful behavior through the in-app reporting mechanism.</span>
+                </li>
+                <li>
+                    <span class="bullet-icon bullet-check">✓</span>
+                    <span><strong>Delete All Data</strong> — You can perform a factory reset from within the app to permanently erase all local data, including identity keys, messages, contacts, and settings. Since your data lives on-device only, this action is absolute and irreversible.</span>
+                </li>
+                <li>
+                    <span class="bullet-icon bullet-check">✓</span>
+                    <span><strong>Unlink Username</strong> — If you claimed a <code>@username</code>, you can release it by removing the email verification binding from your account.</span>
+                </li>
+            </ul>
+            <p>Because Dunes stores virtually no data on its servers, traditional data access or portability requests are not applicable — your data already lives exclusively on your device.</p>
+        </div>
+
+        <!-- Section 8: Changes to This Policy -->
+        <div class="policy-section glass-card" id="section-changes">
+            <div class="policy-section-number">8</div>
+            <h2>Changes to This Policy</h2>
+            <p>We may update this Privacy Policy from time to time to reflect changes in our practices, technology, or legal requirements. When we make material changes, we will:</p>
+            <ul>
+                <li>
+                    <span class="bullet-icon bullet-check">✓</span>
+                    <span>Update the "Effective Date" at the top of this page</span>
+                </li>
+                <li>
+                    <span class="bullet-icon bullet-check">✓</span>
+                    <span>Provide a notice through the Dunes app or on this website</span>
+                </li>
+            </ul>
+            <p>We encourage you to review this page periodically to stay informed about how we protect your privacy. Continued use of Dunes after policy updates constitutes acceptance of the revised terms.</p>
+        </div>
+
+        <!-- Section 9: Contact Information -->
+        <div class="policy-section glass-card" id="section-contact">
+            <div class="policy-section-number">9</div>
+            <h2>Contact Information</h2>
+            <p>If you have any questions, concerns, or requests regarding this Privacy Policy or Dunes' data practices, please reach out to us:</p>
+            <div class="policy-highlight-box">
+                <p>📬 <strong>Email:</strong> <a href="mailto:privacy@dunes.chat" class="contact-link">privacy@dunes.chat</a></p>
+            </div>
+            <p>We will do our best to respond to your inquiry in a timely manner.</p>
+        </div>
+
+    </div>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-top">
+                <div class="footer-brand">
+                    <a href="index.html" class="brand-logo">
+                        <img src="assets/icon.png" alt="Dunes Logo" class="brand-icon">
+                        <span class="brand-text">DUNES</span>
+                    </a>
+                    <p>Redefining absolute mobile communication privacy through device-centric cryptography.</p>
+                </div>
+                <div class="footer-links">
+                    <div class="link-group">
+                        <h4>Navigation</h4>
+                        <a href="index.html#features">Features</a>
+                        <a href="index.html#security">Security Core</a>
+                        <a href="status.html">Service Status</a>
+                        <a href="index.html#download">Download APK</a>
+                    </div>
+                    <div class="link-group">
+                        <h4>Resources</h4>
+                        <a href="https://github.com/4d3l/dunes-updates" target="_blank">Releases & Updates</a>
+                        <a href="https://raw.githubusercontent.com/4d3l/dunes-updates/main/dunes_v1.16.3.apk">Direct APK Link</a>
+                        <a href="privacy.html">Privacy Policy</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Dunes Chat. All rights reserved. Host server coordinates: <code>dunes.chat</code></p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Mobile Drawer Toggle Script -->
+    <script>
+        const mobileBtn = document.getElementById('mobile-menu-btn');
+        const drawer = document.getElementById('mobile-drawer');
+        if (mobileBtn && drawer) {
+            mobileBtn.addEventListener('click', () => {
+                mobileBtn.classList.toggle('active');
+                drawer.classList.toggle('active');
+            });
+            // Close drawer when clicking a link
+            drawer.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileBtn.classList.remove('active');
+                    drawer.classList.remove('active');
+                });
+            });
+        }
+    </script>
+</body>
+</html>
