@@ -54,7 +54,7 @@
             <nav class="desktop-nav">
                 <a href="#features" class="nav-link">Features</a>
                 <a href="#security" class="nav-link">Security</a>
-                <a href="#simulator" class="nav-link">E2EE Demo</a>
+                <a href="status.html" class="nav-link">Status</a>
                 <a href="#download" class="nav-link">Download</a>
                 <a href="#faq" class="nav-link">FAQ</a>
             </nav>
@@ -76,7 +76,7 @@
         <nav class="mobile-nav">
             <a href="#features" class="mobile-link">Features</a>
             <a href="#security" class="mobile-link">Security</a>
-            <a href="#simulator" class="mobile-link">E2EE Demo</a>
+            <a href="status.html" class="mobile-link">Status</a>
             <a href="#download" class="mobile-link">Download</a>
             <a href="#faq" class="mobile-link">FAQ</a>
             <a href="#download" class="btn btn-primary mobile-btn">Download APK</a>
@@ -157,7 +157,6 @@
                             </div>
                             <div class="mockup-call-icons">
                                 <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.94.725l.548 2.2a1 1 0 01-.321.988l-1.305.98a10.582 10.582 0 004.872 4.872l.98-1.305a1 1 0 01.988-.321l2.2.548a1 1 0 01.725.94V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path></svg>
-                                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg>
                             </div>
                         </div>
                     </div>
@@ -296,48 +295,7 @@
         </div>
     </section>
 
-    <!-- Interactive E2EE Simulator Section -->
-    <section class="section simulator-section" id="simulator">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">See E2EE In Real-Time</h2>
-                <p class="section-desc">Try our interactive simulator below to see exactly how your raw message is converted into impenetrable cipher before routing through servers.</p>
-            </div>
 
-            <div class="simulator-wrapper glass-card">
-                <div class="sim-pane sim-input-pane">
-                    <label for="plain-input">Step 1: Write Private Message</label>
-                    <textarea id="plain-input" placeholder="Type something private here...">Meet me at the oasis 🌴. Bring the encryption keys!</textarea>
-                    <div class="pane-footer">
-                        <span id="char-counter">53 characters</span>
-                    </div>
-                </div>
-
-                <div class="sim-controls">
-                    <div class="sim-status" id="sim-status">
-                        <span class="status-dot pulsing"></span>
-                        <span id="status-text">Idle & Ready</span>
-                    </div>
-                    <button class="btn btn-primary btn-sm" id="btn-encrypt-toggle">Encrypt Payload</button>
-                    <div class="sim-keys-display">
-                        <span class="key-lbl">Shared DH Key (Device-Local):</span>
-                        <code id="sim-key-val">dune_dh_7a8f90c...</code>
-                    </div>
-                </div>
-
-                <div class="sim-pane sim-output-pane">
-                    <label>Step 2: Network-Transit Ciphertext</label>
-                    <div class="cipher-box" id="cipher-output">
-                        U2FsdGVkX19P208hZ4JkI+Yt8H7tq1ZtN398f8A+eQ2YcM4bS63K7q9...
-                    </div>
-                    <div class="pane-footer flex-between">
-                        <span class="badge badge-success" id="security-badge">Encrypted (AES-GCM)</span>
-                        <button class="btn-text" id="btn-copy-cipher">Copy Cipher</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
 
     <!-- App Download Hub -->
     <section class="section download-section" id="download">
@@ -499,7 +457,7 @@
                         <h4>Navigation</h4>
                         <a href="#features">Features</a>
                         <a href="#security">Security Core</a>
-                        <a href="#simulator">E2EE Demo</a>
+                        <a href="status.html">Service Status</a>
                         <a href="#download">Download APK</a>
                     </div>
                     <div class="link-group">
@@ -512,10 +470,6 @@
             </div>
             <div class="footer-bottom">
                 <p>&copy; 2026 Dunes Chat. All rights reserved. Host server coordinates: <code>dunes.chat</code></p>
-                <div class="footer-meta">
-                    <span class="status-dot"></span>
-                    <span>All Relay Networks Operational</span>
-                </div>
             </div>
         </div>
     </footer>
