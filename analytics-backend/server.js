@@ -314,5 +314,28 @@ app.get('/dashboard', (req, res) => {
 initializeDatabase().then(() => {
   app.listen(PORT, () => {
     console.log(`Dunes Analytics Backend running on port ${PORT}`);
+    
+    // Automated Self-Pinging to keep the Render free tier awake 24/7
+    const selfUrl = process.env.RENDER_EXTERNAL_URL || process.env.SELF_URL;
+    if (selfUrl) {
+      const pingerInterval = 10 * 60 * 1000; // 10 minutes
+      
+      // Delay the first ping by 10 minutes
+      setInterval(() => {
+        const url = `${selfUrl.replace(/\/$/, '')}/health`;
+        console.log(`Self-pinging to keep awake: ${url}`);
+        
+        const lib = url.startsWith('https') ? require('https') : require('http');
+        lib.get(url, (res) => {
+          console.log(`Self-ping status: ${res.statusCode}`);
+        }).on('error', (err) => {
+          console.error('Self-ping error:', err.message);
+        });
+      }, pingerInterval);
+      
+      console.log(`Self-pinging activated for: ${selfUrl} (every 10m)`);
+    } else {
+      console.log("Self-pinging inactive: RENDER_EXTERNAL_URL environment variable not set.");
+    }
   });
 });
