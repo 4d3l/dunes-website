@@ -711,6 +711,16 @@
           <i data-feather="corner-up-left"></i>
         </div>
       </div>
+
+      <div class="metric-card">
+        <div class="metric-info">
+          <h3>Bot Crawls</h3>
+          <div class="value" id="stat-bots">-</div>
+        </div>
+        <div class="metric-icon">
+          <i data-feather="cpu"></i>
+        </div>
+      </div>
     </div>
 
     <!-- Row 1: Traffic Chart & Funnel -->
@@ -991,6 +1001,7 @@
       document.getElementById('stat-uniques').innerText = Number(data.summary.unique_visitors).toLocaleString();
       document.getElementById('stat-duration').innerText = formatDuration(data.summary.avg_duration);
       document.getElementById('stat-bounce').innerText = `${data.summary.bounce_rate}%`;
+      document.getElementById('stat-bots').innerText = Number(data.summary.bot_views).toLocaleString();
 
       // 2. Conversion Funnel Parsing
       const uniques = data.summary.unique_visitors || 1;
