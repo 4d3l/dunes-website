@@ -480,6 +480,22 @@ app.get('/api/stats', checkAuth, async (req, res) => {
   }
 });
 
+// --- DATABASE RESET ENDPOINT ---
+app.all('/api/reset', checkAuth, async (req, res) => {
+  try {
+    console.log("Database reset requested. Executing safe table truncation...");
+    
+    // Clear the events first to satisfy foreign key constraints, then clear visits
+    await pool.query("DELETE FROM analytics.events;");
+    await pool.query("DELETE FROM analytics.visits;");
+    
+    res.status(200).json({ success: true, message: 'All telemetry statistics cleared successfully. You can now start monitoring fresh traffic!' });
+  } catch (err) {
+    console.error("Error resetting database:", err);
+    res.status(500).json({ error: 'Internal server error during database reset.' });
+  }
+});
+
 // --- SERVE THE ADMIN DASHBOARD PAGE ---
 app.get('/dashboard', (req, res) => {
   res.sendFile(path.join(__dirname, 'dashboard.html'));
