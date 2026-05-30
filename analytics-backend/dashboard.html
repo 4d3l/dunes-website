@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Dunes Analytics Dashboard</title>
+  <title>Dunes Advanced Analytics</title>
   <link rel="icon" type="image/png" href="/favicon.png">
   <!-- Modern Typography -->
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -25,6 +25,7 @@
       --glass-border: rgba(255, 255, 255, 0.05);
       --success-color: #2EA043;
       --danger-color: #F85149;
+      --info-color: #58A6FF;
     }
 
     * {
@@ -46,19 +47,20 @@
     /* Ambient Glow Effects */
     .glow-orb {
       position: absolute;
-      width: 400px;
-      height: 400px;
+      width: 450px;
+      height: 450px;
       border-radius: 50%;
-      background: radial-gradient(circle, rgba(245, 166, 35, 0.08) 0%, rgba(232, 114, 42, 0) 70%);
+      background: radial-gradient(circle, rgba(245, 166, 35, 0.07) 0%, rgba(232, 114, 42, 0) 70%);
       pointer-events: none;
       z-index: 0;
     }
-    .orb-1 { top: -100px; right: -100px; }
-    .orb-2 { bottom: -100px; left: -100px; }
+    .orb-1 { top: -150px; right: -100px; }
+    .orb-2 { bottom: -150px; left: -100px; }
 
     /* Custom Scrollbar */
     ::-webkit-scrollbar {
       width: 8px;
+      height: 8px;
     }
     ::-webkit-scrollbar-track {
       background: var(--bg-primary);
@@ -72,7 +74,7 @@
       background: var(--accent-primary);
     }
 
-    /* LOCK SCREEN STYLES */
+    /* LOCK SCREEN */
     #lock-screen {
       position: fixed;
       top: 0;
@@ -97,7 +99,7 @@
       width: 90%;
       max-width: 420px;
       text-align: center;
-      box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+      box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.4);
       animation: fadeInUp 0.6s ease;
     }
 
@@ -179,10 +181,6 @@
       opacity: 0.95;
     }
 
-    .btn-login:active {
-      transform: translateY(0);
-    }
-
     .error-msg {
       color: var(--danger-color);
       font-size: 0.9rem;
@@ -190,18 +188,18 @@
       display: none;
     }
 
-    /* MAIN APP STYLES */
+    /* MAIN APP */
     #dashboard-app {
       display: none;
       width: 100%;
-      max-width: 1400px;
+      max-width: 1440px;
       margin: 0 auto;
       padding: 2rem;
       z-index: 10;
       position: relative;
     }
 
-    /* Header section */
+    /* Header */
     header {
       display: flex;
       justify-content: space-between;
@@ -227,6 +225,7 @@
       align-items: center;
       justify-content: center;
       color: var(--bg-primary);
+      box-shadow: 0 0 15px rgba(245, 166, 35, 0.25);
     }
 
     .brand-title h1 {
@@ -282,7 +281,7 @@
     /* Key Cards Row */
     .metrics-row {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
       gap: 1.5rem;
       margin-bottom: 2.5rem;
       animation: fadeInUp 0.6s ease;
@@ -307,24 +306,24 @@
     }
 
     .metric-info h3 {
-      font-size: 0.9rem;
+      font-size: 0.85rem;
       color: var(--text-muted);
       text-transform: uppercase;
       letter-spacing: 0.5px;
-      margin-bottom: 0.5rem;
+      margin-bottom: 0.4rem;
     }
 
     .metric-info .value {
-      font-size: 2.2rem;
+      font-size: 2.1rem;
       font-weight: 700;
       color: var(--text-main);
     }
 
     .metric-icon {
-      width: 48px;
-      height: 48px;
-      border-radius: 12px;
-      background: rgba(245, 166, 35, 0.1);
+      width: 44px;
+      height: 44px;
+      border-radius: 10px;
+      background: rgba(245, 166, 35, 0.08);
       border: 1px solid rgba(245, 166, 35, 0.15);
       display: flex;
       align-items: center;
@@ -332,7 +331,7 @@
       color: var(--accent-primary);
     }
 
-    /* Main Grid Layout */
+    /* Key Grid Layouts */
     .dashboard-grid {
       display: grid;
       grid-template-columns: 2fr 1fr;
@@ -372,14 +371,13 @@
       width: 20px;
     }
 
-    /* Charts specific styles */
     .chart-container {
       position: relative;
       width: 100%;
       height: 320px;
     }
 
-    /* Tables & lists specific styles */
+    /* TABLES */
     .data-table-container {
       width: 100%;
       overflow-x: auto;
@@ -422,6 +420,124 @@
       text-decoration: underline;
     }
 
+    /* CONVERSION FUNNEL VISUALIZATION */
+    .funnel-container {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      margin: auto 0;
+      padding: 1rem 0;
+    }
+
+    .funnel-stage {
+      display: flex;
+      align-items: center;
+      position: relative;
+    }
+
+    .funnel-bar-outer {
+      flex: 1;
+      height: 48px;
+      background: rgba(22, 27, 34, 0.4);
+      border: 1px solid var(--glass-border);
+      border-radius: 8px;
+      overflow: hidden;
+      position: relative;
+      display: flex;
+      align-items: center;
+      transition: border-color 0.3s ease;
+    }
+
+    .funnel-bar-outer:hover {
+      border-color: rgba(245, 166, 35, 0.2);
+    }
+
+    .funnel-bar-fill {
+      height: 100%;
+      background: linear-gradient(90deg, rgba(245, 166, 35, 0.15) 0%, rgba(232, 114, 42, 0.03) 100%);
+      border-right: 2px solid var(--accent-primary);
+      display: flex;
+      align-items: center;
+      padding-left: 15px;
+      font-weight: 500;
+      transition: width 1s cubic-bezier(0.1, 0.8, 0.2, 1);
+    }
+
+    .funnel-label {
+      position: absolute;
+      left: 15px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .funnel-label i {
+      color: var(--accent-primary);
+      width: 16px;
+    }
+
+    .funnel-stats {
+      margin-left: 20px;
+      width: 90px;
+      text-align: right;
+    }
+
+    .funnel-value {
+      font-size: 1.1rem;
+      font-weight: 700;
+    }
+
+    .funnel-pct {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    /* SCROLL DEPTH LIST */
+    .scroll-list {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      margin: auto 0;
+    }
+
+    .scroll-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .scroll-label {
+      font-weight: 500;
+      width: 60px;
+    }
+
+    .scroll-track {
+      flex: 1;
+      height: 14px;
+      background: rgba(0, 0, 0, 0.2);
+      border: 1px solid var(--glass-border);
+      border-radius: 20px;
+      overflow: hidden;
+      margin: 0 15px;
+    }
+
+    .scroll-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--accent-primary) 0%, var(--accent-secondary) 100%);
+      border-radius: 20px;
+      transition: width 1s cubic-bezier(0.1, 0.8, 0.2, 1);
+      box-shadow: 0 0 10px rgba(245, 166, 35, 0.2);
+    }
+
+    .scroll-pct {
+      font-weight: 700;
+      font-size: 0.95rem;
+      width: 45px;
+      text-align: right;
+    }
+
     /* Country List styles */
     .country-list {
       display: flex;
@@ -440,11 +556,6 @@
       background: rgba(255, 255, 255, 0.02);
       border: 1px solid rgba(255, 255, 255, 0.03);
       border-radius: 8px;
-      transition: border-color 0.2s ease;
-    }
-
-    .country-item:hover {
-      border-color: rgba(245, 166, 35, 0.2);
     }
 
     .country-name {
@@ -476,56 +587,35 @@
       font-size: 0.75rem;
     }
 
-    /* Layout responsive rules */
-    @media (max-width: 1024px) {
-      .dashboard-grid {
-        grid-template-columns: 1fr;
-      }
-    }
-
-    .second-row-grid {
+    /* Subgrids layout */
+    .row-2-grid {
       display: grid;
-      grid-template-columns: 1fr 1fr 1fr;
+      grid-template-columns: 1fr 1fr;
       gap: 1.5rem;
-      margin-top: 1.5rem;
+      margin-bottom: 1.5rem;
     }
 
-    @media (max-width: 900px) {
-      .second-row-grid {
+    .row-3-grid {
+      display: grid;
+      grid-template-columns: 1.5fr 1.5fr 1fr;
+      gap: 1.5rem;
+    }
+
+    @media (max-width: 1024px) {
+      .dashboard-grid, .row-2-grid, .row-3-grid {
         grid-template-columns: 1fr;
-      }
-      header {
-        flex-direction: column;
-        gap: 15px;
-        align-items: flex-start;
-      }
-      .header-controls {
-        width: 100%;
-        justify-content: space-between;
       }
     }
 
     /* Keyframes */
     @keyframes fadeInUp {
-      from {
-        opacity: 0;
-        transform: translateY(20px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
     @keyframes fadeInDown {
-      from {
-        opacity: 0;
-        transform: translateY(-20px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
     }
   </style>
 </head>
@@ -534,14 +624,14 @@
   <div class="glow-orb orb-1"></div>
   <div class="glow-orb orb-2"></div>
 
-  <!-- 1. LOCK SCREEN CONTAINER -->
+  <!-- 1. SECURE LOCK SCREEN -->
   <div id="lock-screen">
     <div class="lock-card">
       <div class="lock-logo">
         <i data-feather="shield" style="width: 32px; height: 32px;"></i>
       </div>
       <h2>Dunes Analytics</h2>
-      <p>Please enter your secure dashboard password.</p>
+      <p>Enter your secure password to unlock metrics.</p>
       
       <form id="login-form" onsubmit="handleLogin(event)">
         <div class="input-group">
@@ -562,8 +652,8 @@
           <i data-feather="bar-chart-2"></i>
         </div>
         <div>
-          <h1>Dunes Analytics</h1>
-          <p>Real-time privacy-first visitor telemetry</p>
+          <h1>Dunes Advanced Analytics</h1>
+          <p>Real-time privacy-safe behavior telemetry</p>
         </div>
       </div>
       
@@ -604,26 +694,26 @@
 
       <div class="metric-card">
         <div class="metric-info">
-          <h3>Bot Detections</h3>
-          <div class="value" id="stat-bots">-</div>
+          <h3>Avg. Time on Page</h3>
+          <div class="value" id="stat-duration">-</div>
         </div>
         <div class="metric-icon">
-          <i data-feather="cpu"></i>
+          <i data-feather="clock"></i>
         </div>
       </div>
 
       <div class="metric-card">
         <div class="metric-info">
-          <h3>Active Domains</h3>
-          <div class="value" id="stat-active-domains">1</div>
+          <h3>Bounce Rate</h3>
+          <div class="value" id="stat-bounce">-</div>
         </div>
         <div class="metric-icon">
-          <i data-feather="globe"></i>
+          <i data-feather="corner-up-left"></i>
         </div>
       </div>
     </div>
 
-    <!-- Main Grid (Area Chart + Country List) -->
+    <!-- Row 1: Traffic Chart & Funnel -->
     <div class="dashboard-grid">
       <div class="card">
         <div class="card-header">
@@ -637,6 +727,101 @@
         </div>
       </div>
 
+      <!-- Conversion Funnel Card -->
+      <div class="card">
+        <div class="card-header">
+          <h2 class="card-title">
+            <i data-feather="filter"></i>
+            Conversion Funnel
+          </h2>
+        </div>
+        <div class="funnel-container">
+          <div class="funnel-stage">
+            <div class="funnel-bar-outer">
+              <div class="funnel-bar-fill" style="width: 100%;">
+                <span class="funnel-label"><i data-feather="eye"></i> Page Visitors</span>
+              </div>
+            </div>
+            <div class="funnel-stats">
+              <div class="funnel-value" id="funnel-val-visitors">0</div>
+              <div class="funnel-pct">100%</div>
+            </div>
+          </div>
+
+          <div class="funnel-stage">
+            <div class="funnel-bar-outer">
+              <div class="funnel-bar-fill" id="funnel-bar-intent" style="width: 0%;">
+                <span class="funnel-label"><i data-feather="download"></i> Download Intent</span>
+              </div>
+            </div>
+            <div class="funnel-stats">
+              <div class="funnel-value" id="funnel-val-intent">0</div>
+              <div class="funnel-pct" id="funnel-pct-intent">0%</div>
+            </div>
+          </div>
+
+          <div class="funnel-stage">
+            <div class="funnel-bar-outer">
+              <div class="funnel-bar-fill" id="funnel-bar-guide" style="width: 0%;">
+                <span class="funnel-label"><i data-feather="help-circle"></i> Sideload Clicks</span>
+              </div>
+            </div>
+            <div class="funnel-stats">
+              <div class="funnel-value" id="funnel-val-guide">0</div>
+              <div class="funnel-pct" id="funnel-pct-guide">0%</div>
+            </div>
+          </div>
+
+          <div class="funnel-stage">
+            <div class="funnel-bar-outer">
+              <div class="funnel-bar-fill" id="funnel-bar-download" style="width: 0%; border-right-color: var(--success-color);">
+                <span class="funnel-label" style="color: #ADFFB4;"><i data-feather="check-circle" style="color: var(--success-color);"></i> Downloaded APK</span>
+              </div>
+            </div>
+            <div class="funnel-stats">
+              <div class="funnel-value" id="funnel-val-download" style="color: var(--success-color);">0</div>
+              <div class="funnel-pct" id="funnel-pct-download" style="color: var(--success-color);">0%</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Row 2: Scroll Depth & Countries -->
+    <div class="row-2-grid">
+      <!-- Scroll Depth Heatmap -->
+      <div class="card">
+        <div class="card-header">
+          <h2 class="card-title">
+            <i data-feather="chevrons-down"></i>
+            Read Depth Breakdown
+          </h2>
+        </div>
+        <div class="scroll-list">
+          <div class="scroll-row">
+            <span class="scroll-label">25% (Intro)</span>
+            <div class="scroll-track"><div class="scroll-fill" id="scroll-bar-25" style="width: 0%;"></div></div>
+            <span class="scroll-pct" id="scroll-pct-25">0%</span>
+          </div>
+          <div class="scroll-row">
+            <span class="scroll-label">50% (Specs)</span>
+            <div class="scroll-track"><div class="scroll-fill" id="scroll-bar-50" style="width: 0%;"></div></div>
+            <span class="scroll-pct" id="scroll-pct-50">0%</span>
+          </div>
+          <div class="scroll-row">
+            <span class="scroll-label">75% (Hub)</span>
+            <div class="scroll-track"><div class="scroll-fill" id="scroll-bar-75" style="width: 0%;"></div></div>
+            <span class="scroll-pct" id="scroll-pct-75">0%</span>
+          </div>
+          <div class="scroll-row">
+            <span class="scroll-label">100% (FAQ)</span>
+            <div class="scroll-track"><div class="scroll-fill" id="scroll-bar-100" style="width: 0%;"></div></div>
+            <span class="scroll-pct" id="scroll-pct-100">0%</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Countries List -->
       <div class="card">
         <div class="card-header">
           <h2 class="card-title">
@@ -645,14 +830,15 @@
           </h2>
         </div>
         <div class="country-list" id="country-list-container">
-          <!-- Countries injected here -->
+          <!-- Injected here -->
         </div>
       </div>
     </div>
 
-    <!-- Second Grid (Pages Table + Referrers Table + Dev/Browser Charts) -->
-    <div class="second-row-grid">
-      <div class="card" style="grid-column: span 1;">
+    <!-- Row 3: Pages + Retention/Devices + FAQ clicks -->
+    <div class="row-3-grid">
+      <!-- Pages -->
+      <div class="card">
         <div class="card-header">
           <h2 class="card-title">
             <i data-feather="file-text"></i>
@@ -663,7 +849,7 @@
           <table>
             <thead>
               <tr>
-                <th>Page Path</th>
+                <th>Page</th>
                 <th style="text-align: right;">Views</th>
               </tr>
             </thead>
@@ -674,58 +860,57 @@
         </div>
       </div>
 
-      <div class="card" style="grid-column: span 1;">
+      <!-- FAQ Interests Table -->
+      <div class="card">
         <div class="card-header">
           <h2 class="card-title">
-            <i data-feather="external-link"></i>
-            Top Referrers
+            <i data-feather="help-circle"></i>
+            Most Clicked FAQs
           </h2>
         </div>
         <div class="data-table-container">
           <table>
             <thead>
               <tr>
-                <th>Referrer Source</th>
-                <th style="text-align: right;">Views</th>
+                <th>Question</th>
+                <th style="text-align: right;">Clicks</th>
               </tr>
             </thead>
-            <tbody id="referrers-table-body">
+            <tbody id="faq-table-body">
               <!-- Injected here -->
             </tbody>
           </table>
         </div>
       </div>
 
-      <div class="card" style="grid-column: span 1;">
+      <!-- Retention Doughnut Chart (New vs Returning) -->
+      <div class="card">
         <div class="card-header">
           <h2 class="card-title">
-            <i data-feather="smartphone"></i>
-            Device Breakdown
+            <i data-feather="repeat"></i>
+            Visitor Retention
           </h2>
         </div>
         <div class="chart-container" style="height: 220px; display: flex; align-items: center; justify-content: center;">
-          <canvas id="deviceChart" style="max-height: 200px; max-width: 200px;"></canvas>
+          <canvas id="retentionChart" style="max-height: 200px; max-width: 200px;"></canvas>
         </div>
       </div>
     </div>
   </div>
 
   <script>
-    // Initialize Feather Icons
     feather.replace();
 
     let trafficChartInstance = null;
-    let deviceChartInstance = null;
+    let retentionChartInstance = null;
 
-    // Direct auth check on page load
+    // Load auth
     window.onload = function() {
-      // Check if password query param is passed
       const urlParams = new URLSearchParams(window.location.search);
       const urlPwd = urlParams.get('pwd');
       
       if (urlPwd) {
         sessionStorage.setItem('dunes_dashboard_pwd', urlPwd);
-        // Clean URL parameter for safety
         window.history.replaceState({}, document.title, window.location.pathname);
       }
 
@@ -751,17 +936,13 @@
     async function authenticateAndLoad(password) {
       try {
         const res = await fetch(`/api/stats?timeframe=30&pwd=${encodeURIComponent(password)}`);
-        
         if (res.ok) {
           sessionStorage.setItem('dunes_dashboard_pwd', password);
-          
-          // Animate transition
           const lockScreen = document.getElementById('lock-screen');
           lockScreen.style.opacity = '0';
           setTimeout(() => {
             lockScreen.style.visibility = 'hidden';
             document.getElementById('dashboard-app').style.display = 'block';
-            // Render dashboard data
             res.json().then(data => renderDashboard(data));
           }, 300);
         } else {
@@ -777,21 +958,8 @@
       const errorMsg = document.getElementById('error-message');
       errorMsg.style.display = 'block';
       errorMsg.style.animation = 'shake 0.3s ease';
-      setTimeout(() => {
-        errorMsg.style.animation = '';
-      }, 300);
+      setTimeout(() => { errorMsg.style.animation = ''; }, 300);
     }
-
-    // Shake animation for error
-    const styleSheet = document.createElement("style");
-    styleSheet.innerText = `
-      @keyframes shake {
-        0%, 100% { transform: translateX(0); }
-        25% { transform: translateX(-6px); }
-        75% { transform: translateX(6px); }
-      }
-    `;
-    document.head.appendChild(styleSheet);
 
     async function fetchStats() {
       const password = sessionStorage.getItem('dunes_dashboard_pwd');
@@ -809,13 +977,69 @@
       }
     }
 
+    // Format duration nicely (e.g. 1m 24s)
+    function formatDuration(sec) {
+      if (sec < 60) return `${sec}s`;
+      const min = Math.floor(sec / 60);
+      const remainingSec = sec % 60;
+      return `${min}m ${remainingSec}s`;
+    }
+
     function renderDashboard(data) {
-      // 1. Metric stats
+      // 1. Metric values
       document.getElementById('stat-total-views').innerText = Number(data.summary.total_views).toLocaleString();
       document.getElementById('stat-uniques').innerText = Number(data.summary.unique_visitors).toLocaleString();
-      document.getElementById('stat-bots').innerText = Number(data.summary.bot_views).toLocaleString();
+      document.getElementById('stat-duration').innerText = formatDuration(data.summary.avg_duration);
+      document.getElementById('stat-bounce').innerText = `${data.summary.bounce_rate}%`;
 
-      // 2. Load Top Pages
+      // 2. Conversion Funnel Parsing
+      const uniques = data.summary.unique_visitors || 1;
+      
+      let clickIntentCount = 0;
+      let clickGuideCount = 0;
+      let clickDownloadCount = 0;
+
+      data.events.forEach(ev => {
+        if (ev.event_name === 'click_download_intent') clickIntentCount = parseInt(ev.count, 10);
+        else if (ev.event_name === 'click_sideload_guide') clickGuideCount = parseInt(ev.count, 10);
+        else if (ev.event_name === 'click_download_apk') clickDownloadCount = parseInt(ev.count, 10);
+      });
+
+      const intentPct = Math.round((clickIntentCount / uniques) * 100);
+      const guidePct = Math.round((clickGuideCount / uniques) * 100);
+      const downloadPct = Math.round((clickDownloadCount / uniques) * 100);
+
+      document.getElementById('funnel-val-visitors').innerText = uniques.toLocaleString();
+      
+      document.getElementById('funnel-val-intent').innerText = clickIntentCount.toLocaleString();
+      document.getElementById('funnel-pct-intent').innerText = `${intentPct}%`;
+      document.getElementById('funnel-bar-intent').style.width = `${Math.max(intentPct, 3)}%`;
+
+      document.getElementById('funnel-val-guide').innerText = clickGuideCount.toLocaleString();
+      document.getElementById('funnel-pct-guide').innerText = `${guidePct}%`;
+      document.getElementById('funnel-bar-guide').style.width = `${Math.max(guidePct, 3)}%`;
+
+      document.getElementById('funnel-val-download').innerText = clickDownloadCount.toLocaleString();
+      document.getElementById('funnel-pct-download').innerText = `${downloadPct}%`;
+      document.getElementById('funnel-bar-download').style.width = `${Math.max(downloadPct, 3)}%`;
+
+      // 3. Scroll Depth Parsing
+      const totalScrollVisits = parseInt(data.scroll.total_visits, 10) || 1;
+      const s25Pct = Math.round((parseInt(data.scroll.scroll_25, 10) || 0) / totalScrollVisits * 100);
+      const s50Pct = Math.round((parseInt(data.scroll.scroll_50, 10) || 0) / totalScrollVisits * 100);
+      const s75Pct = Math.round((parseInt(data.scroll.scroll_75, 10) || 0) / totalScrollVisits * 100);
+      const s100Pct = Math.round((parseInt(data.scroll.scroll_100, 10) || 0) / totalScrollVisits * 100);
+
+      document.getElementById('scroll-pct-25').innerText = `${s25Pct}%`;
+      document.getElementById('scroll-bar-25').style.width = `${s25Pct}%`;
+      document.getElementById('scroll-pct-50').innerText = `${s50Pct}%`;
+      document.getElementById('scroll-bar-50').style.width = `${s50Pct}%`;
+      document.getElementById('scroll-pct-75').innerText = `${s75Pct}%`;
+      document.getElementById('scroll-bar-75').style.width = `${s75Pct}%`;
+      document.getElementById('scroll-pct-100').innerText = `${s100Pct}%`;
+      document.getElementById('scroll-bar-100').style.width = `${s100Pct}%`;
+
+      // 4. Load Tables (Pages)
       const pagesTbody = document.getElementById('pages-table-body');
       pagesTbody.innerHTML = '';
       if (data.pages.length === 0) {
@@ -831,42 +1055,36 @@
         });
       }
 
-      // 3. Load Top Referrers
-      const referrersTbody = document.getElementById('referrers-table-body');
-      referrersTbody.innerHTML = '';
-      if (data.referrers.length === 0) {
-        referrersTbody.innerHTML = `<tr><td colspan="2" style="text-align:center; color:var(--text-muted);">No referrer data available</td></tr>`;
+      // 5. Load FAQ Clicks Table
+      const faqTbody = document.getElementById('faq-table-body');
+      faqTbody.innerHTML = '';
+      if (data.faq.length === 0) {
+        faqTbody.innerHTML = `<tr><td colspan="2" style="text-align:center; color:var(--text-muted);">No FAQ clicks yet</td></tr>`;
       } else {
-        data.referrers.forEach(row => {
-          let cleanedReferrer = row.referrer_source;
-          if (cleanedReferrer.startsWith('http')) {
-            try {
-              cleanedReferrer = new URL(cleanedReferrer).hostname;
-            } catch(e) {}
-          }
-          referrersTbody.innerHTML += `
+        data.faq.forEach(row => {
+          // Truncate long questions
+          const shortQ = row.faq_question.length > 40 ? row.faq_question.substring(0, 37) + '...' : row.faq_question;
+          faqTbody.innerHTML += `
             <tr>
-              <td style="font-weight:500;">${cleanedReferrer}</td>
-              <td style="text-align: right; font-weight:600;">${Number(row.views).toLocaleString()}</td>
+              <td style="font-weight:500;" title="${row.faq_question}">${shortQ}</td>
+              <td style="text-align: right; font-weight:600;">${Number(row.count).toLocaleString()}</td>
             </tr>
           `;
         });
       }
 
-      // 4. Load Countries
+      // 6. Load Countries List
       const countryContainer = document.getElementById('country-list-container');
       countryContainer.innerHTML = '';
       if (data.countries.length === 0) {
         countryContainer.innerHTML = `<div style="text-align:center; color:var(--text-muted); margin: 2rem 0;">No geographic data yet</div>`;
       } else {
-        const maxViews = Math.max(...data.countries.map(c => parseInt(c.views, 10)));
         data.countries.forEach(row => {
           const cCode = row.country.toLowerCase();
           const flagImg = row.country !== 'Unknown' 
             ? `<img src="https://flagcdn.com/32x24/${cCode}.png" class="country-flag" alt="${row.country} Flag">` 
             : `<i data-feather="help-circle" style="width:16px; height:16px; color:var(--text-muted);"></i>`;
 
-          // Format country name nicely
           let countryName = row.country;
           if (countryName === 'Unknown') countryName = 'Unknown Region';
           else if (countryName === 'US') countryName = 'United States';
@@ -891,16 +1109,13 @@
         feather.replace();
       }
 
-      // 5. Render Main Traffic Area Chart
+      // 7. Render Charts
       renderTrafficChart(data.traffic);
-
-      // 6. Render Device Doughnut Chart
-      renderDeviceChart(data.devices);
+      renderRetentionChart(data.visitor_types);
     }
 
     function renderTrafficChart(trafficData) {
       const ctx = document.getElementById('trafficChart').getContext('2d');
-      
       const labels = trafficData.map(d => {
         const dateObj = new Date(d.date);
         return dateObj.toLocaleDateString(undefined, { month: 'short', day: 'numeric' });
@@ -946,10 +1161,7 @@
           maintainAspectRatio: false,
           plugins: {
             legend: {
-              labels: {
-                color: '#8B949E',
-                font: { family: 'Outfit', size: 12 }
-              }
+              labels: { color: '#8B949E', font: { family: 'Outfit', size: 12 } }
             },
             tooltip: {
               padding: 12,
@@ -972,33 +1184,37 @@
       });
     }
 
-    function renderDeviceChart(deviceData) {
-      const ctx = document.getElementById('deviceChart').getContext('2d');
+    function renderRetentionChart(visitorData) {
+      const ctx = document.getElementById('retentionChart').getContext('2d');
       
-      const labels = deviceData.map(d => d.device);
-      const data = deviceData.map(d => parseInt(d.views, 10));
+      let newCount = 0;
+      let returningCount = 0;
 
-      if (deviceChartInstance) {
-        deviceChartInstance.destroy();
+      visitorData.forEach(row => {
+        if (row.visitor_type === 'New') newCount = parseInt(row.count, 10);
+        else if (row.visitor_type === 'Returning') returningCount = parseInt(row.count, 10);
+      });
+
+      const labels = ['New Visitors', 'Returning Visitors'];
+      const data = [newCount, returningCount];
+
+      if (retentionChartInstance) {
+        retentionChartInstance.destroy();
       }
 
-      // If no device data
-      if (data.length === 0) {
-        labels.push('No data');
-        data.push(1);
+      // Handle empty state gracefully
+      if (newCount === 0 && returningCount === 0) {
+        data[0] = 1; // display single color placeholder
+        labels[0] = 'No visitors yet';
       }
 
-      deviceChartInstance = new Chart(ctx, {
+      retentionChartInstance = new Chart(ctx, {
         type: 'doughnut',
         data: {
           labels: labels,
           datasets: [{
             data: data,
-            backgroundColor: [
-              '#F5A623', // Amber Accent
-              '#E8722A', // Orange Accent
-              '#8B949E'  // Muted Gray
-            ],
+            backgroundColor: ['#F5A623', '#58A6FF'],
             borderWidth: 0,
             hoverOffset: 4
           }]
@@ -1009,10 +1225,7 @@
           plugins: {
             legend: {
               position: 'bottom',
-              labels: {
-                color: '#8B949E',
-                font: { family: 'Outfit', size: 11 }
-              }
+              labels: { color: '#8B949E', font: { family: 'Outfit', size: 11 } }
             }
           },
           cutout: '70%'

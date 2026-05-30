@@ -40,7 +40,7 @@ async function initializeDatabase() {
     // Create an isolated schema for analytics so we never touch the default 'public' schema tables
     await client.query("CREATE SCHEMA IF NOT EXISTS analytics;");
     
-    // Create the visits table
+    // Create or update the visits table
     await client.query(`
       CREATE TABLE IF NOT EXISTS analytics.visits (
         id SERIAL PRIMARY KEY,
@@ -55,9 +55,28 @@ async function initializeDatabase() {
       );
     `);
 
+    // Perform safe schema migrations (add new columns if they do not exist)
+    await client.query("ALTER TABLE analytics.visits ADD COLUMN IF NOT EXISTS persistent_hash VARCHAR(64);");
+    await client.query("ALTER TABLE analytics.visits ADD COLUMN IF NOT EXISTS duration INTEGER DEFAULT 0;");
+    await client.query("ALTER TABLE analytics.visits ADD COLUMN IF NOT EXISTS max_scroll INTEGER DEFAULT 0;");
+
+    // Create the events table
+    await client.query(`
+      CREATE TABLE IF NOT EXISTS analytics.events (
+        id SERIAL PRIMARY KEY,
+        timestamp TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP,
+        visit_id INTEGER REFERENCES analytics.visits(id) ON DELETE CASCADE,
+        event_name VARCHAR(100) NOT NULL,
+        event_value VARCHAR(255)
+      );
+    `);
+
     // Create indexes for efficient dashboard queries
     await client.query("CREATE INDEX IF NOT EXISTS idx_visits_timestamp ON analytics.visits(timestamp);");
     await client.query("CREATE INDEX IF NOT EXISTS idx_visits_is_bot ON analytics.visits(is_bot);");
+    await client.query("CREATE INDEX IF NOT EXISTS idx_visits_persistent_hash ON analytics.visits(persistent_hash);");
+    await client.query("CREATE INDEX IF NOT EXISTS idx_events_visit_id ON analytics.visits(id);");
+    await client.query("CREATE INDEX IF NOT EXISTS idx_events_event_name ON analytics.events(event_name);");
 
     console.log("Database initialized successfully.");
   } catch (err) {
@@ -117,6 +136,12 @@ function generateSessionHash(ip, ua, salt = '') {
   return crypto.createHash('sha256').update(data).digest('hex');
 }
 
+// Persistent Cookieless Hash generator (IP + UA + Salt) to track returning visitors across days
+function generatePersistentHash(ip, ua, salt = '') {
+  const data = `${ip}-${ua}-${salt}`;
+  return crypto.createHash('sha256').update(data).digest('hex');
+}
+
 // Health check endpoint
 app.get('/health', (req, res) => {
   res.status(200).json({ status: 'OK', timestamp: new Date() });
@@ -144,24 +169,76 @@ app.post('/api/track', async (req, res) => {
     const uaString = req.headers['user-agent'] || '';
     const { browser, device, isBot } = parseUserAgent(uaString);
 
-    // 4. Generate a privacy-safe session hash (Salted with PORT to have a server-specific variable)
+    // 4. Generate privacy-safe daily session hash and persistent cross-day hash
     const salt = process.env.SALT || 'dunes-secure-salt';
     const sessionHash = generateSessionHash(ip, uaString, salt);
+    const persistentHash = generatePersistentHash(ip, uaString, salt);
 
-    // 5. Insert visit into Postgres
+    // 5. Insert visit into Postgres and return the row ID
     const query = `
-      INSERT INTO analytics.visits (page_path, referrer, session_hash, country, browser, device, is_bot)
-      VALUES ($1, $2, $3, $4, $5, $6, $7)
+      INSERT INTO analytics.visits (page_path, referrer, session_hash, persistent_hash, country, browser, device, is_bot)
+      VALUES ($1, $2, $3, $4, $5, $6, $7, $8)
+      RETURNING id
     `;
-    // Clean up referrer length to fit 512 limit
     const cleanReferrer = referrer ? referrer.substring(0, 512) : null;
     const cleanPath = page_path.substring(0, 255);
 
-    await pool.query(query, [cleanPath, cleanReferrer, sessionHash, country, browser, device, isBot]);
+    const result = await pool.query(query, [cleanPath, cleanReferrer, sessionHash, persistentHash, country, browser, device, isBot]);
+    const visitId = result.rows[0].id;
 
-    res.status(200).json({ success: true });
+    res.status(200).json({ success: true, visit_id: visitId });
   } catch (err) {
     console.error("Error logging visit:", err);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+});
+
+// --- SESSION UPDATE ENDPOINT (Duration & Scroll Depth) ---
+app.post('/api/update', async (req, res) => {
+  const { visit_id, duration, max_scroll } = req.body;
+
+  if (!visit_id) {
+    return res.status(400).json({ error: 'visit_id is required' });
+  }
+
+  try {
+    const query = `
+      UPDATE analytics.visits
+      SET duration = GREATEST(duration, $1),
+          max_scroll = GREATEST(max_scroll, $2)
+      WHERE id = $3
+    `;
+    const cleanDuration = parseInt(duration, 10) || 0;
+    const cleanScroll = parseInt(max_scroll, 10) || 0;
+
+    await pool.query(query, [cleanDuration, cleanScroll, visit_id]);
+    res.status(200).json({ success: true });
+  } catch (err) {
+    console.error("Error updating session metrics:", err);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+});
+
+// --- CUSTOM EVENT LOGGING ENDPOINT ---
+app.post('/api/event', async (req, res) => {
+  const { visit_id, event_name, event_value } = req.body;
+
+  if (!visit_id || !event_name) {
+    return res.status(400).json({ error: 'visit_id and event_name are required' });
+  }
+
+  try {
+    const query = `
+      INSERT INTO analytics.events (visit_id, event_name, event_value)
+      VALUES ($1, $2, $3)
+    `;
+    const cleanName = event_name.substring(0, 100);
+    const cleanVal = event_value ? event_value.substring(0, 255) : null;
+
+    await pool.query(query, [visit_id, cleanName, cleanVal]);
+    res.status(200).json({ success: true });
+  } catch (err) {
+    console.error("Error logging custom event:", err);
     res.status(500).json({ error: 'Internal server error' });
   }
 });
@@ -259,6 +336,81 @@ app.get('/api/stats', checkAuth, async (req, res) => {
       GROUP BY is_bot;
     `;
 
+    // 7. Average Duration (Time spent on page)
+    const durationQuery = `
+      SELECT COALESCE(ROUND(AVG(duration)), 0) as avg_duration
+      FROM analytics.visits
+      WHERE timestamp >= NOW() - INTERVAL '${daysLimit} days' AND is_bot = FALSE AND duration > 0;
+    `;
+
+    // 8. Bounce Rate
+    const bounceQuery = `
+      WITH session_counts AS (
+        SELECT session_hash, COUNT(*) as page_views, MAX(duration) as max_dur
+        FROM analytics.visits
+        WHERE timestamp >= NOW() - INTERVAL '${daysLimit} days' AND is_bot = FALSE
+        GROUP BY session_hash
+      )
+      SELECT 
+        COUNT(*) as total_sessions,
+        SUM(CASE WHEN page_views = 1 AND max_dur < 12 THEN 1 ELSE 0 END) as bounced_sessions
+      FROM session_counts;
+    `;
+
+    // 9. Scroll Depth Breakdown
+    const scrollQuery = `
+      SELECT 
+        SUM(CASE WHEN max_scroll >= 25 THEN 1 ELSE 0 END) as scroll_25,
+        SUM(CASE WHEN max_scroll >= 50 THEN 1 ELSE 0 END) as scroll_50,
+        SUM(CASE WHEN max_scroll >= 75 THEN 1 ELSE 0 END) as scroll_75,
+        SUM(CASE WHEN max_scroll >= 100 THEN 1 ELSE 0 END) as scroll_100,
+        COUNT(*) as total_visits
+      FROM analytics.visits
+      WHERE timestamp >= NOW() - INTERVAL '${daysLimit} days' AND is_bot = FALSE;
+    `;
+
+    // 10. New vs. Returning Visitors
+    const visitorTypeQuery = `
+      WITH first_visits AS (
+        SELECT persistent_hash, MIN(DATE(timestamp)) as first_date
+        FROM analytics.visits
+        WHERE is_bot = FALSE
+        GROUP BY persistent_hash
+      ),
+      visit_types AS (
+        SELECT 
+          v.id,
+          CASE WHEN DATE(v.timestamp) > f.first_date THEN 'Returning' ELSE 'New' END as visitor_type
+        FROM analytics.visits v
+        JOIN first_visits f ON v.persistent_hash = f.persistent_hash
+        WHERE v.timestamp >= NOW() - INTERVAL '${daysLimit} days' AND v.is_bot = FALSE
+      )
+      SELECT visitor_type, COUNT(*) as count
+      FROM visit_types
+      GROUP BY visitor_type;
+    `;
+
+    // 11. Custom Events Aggregated (for Conversion Funnel)
+    const eventsQuery = `
+      SELECT event_name, COUNT(*) as count
+      FROM analytics.events e
+      JOIN analytics.visits v ON e.visit_id = v.id
+      WHERE e.timestamp >= NOW() - INTERVAL '${daysLimit} days' AND v.is_bot = FALSE
+      GROUP BY event_name;
+    `;
+
+    // 12. FAQ Interest Breakdown
+    const faqQuery = `
+      SELECT event_value as faq_question, COUNT(*) as count
+      FROM analytics.events e
+      JOIN analytics.visits v ON e.visit_id = v.id
+      WHERE e.timestamp >= NOW() - INTERVAL '${daysLimit} days' 
+        AND e.event_name = 'faq_expanded' AND v.is_bot = FALSE
+      GROUP BY event_value
+      ORDER BY count DESC
+      LIMIT 5;
+    `;
+
     // Run all database queries in parallel
     const [
       trafficRes,
@@ -267,7 +419,13 @@ app.get('/api/stats', checkAuth, async (req, res) => {
       countriesRes,
       devicesRes,
       browsersRes,
-      botsRes
+      botsRes,
+      durationRes,
+      bounceRes,
+      scrollRes,
+      visitorTypeRes,
+      eventsRes,
+      faqRes
     ] = await Promise.all([
       pool.query(trafficQuery),
       pool.query(pagesQuery),
@@ -275,7 +433,13 @@ app.get('/api/stats', checkAuth, async (req, res) => {
       pool.query(countriesQuery),
       pool.query(devicesQuery),
       pool.query(browsersQuery),
-      pool.query(botsQuery)
+      pool.query(botsQuery),
+      pool.query(durationQuery),
+      pool.query(bounceQuery),
+      pool.query(scrollQuery),
+      pool.query(visitorTypeQuery),
+      pool.query(eventsQuery),
+      pool.query(faqQuery)
     ]);
 
     // Parse bots breakdown safely
@@ -286,18 +450,29 @@ app.get('/api/stats', checkAuth, async (req, res) => {
       else humanViews = parseInt(row.views, 10);
     });
 
+    // Parse bounce rate safely
+    const totalSessions = parseInt(bounceRes.rows[0].total_sessions, 10) || 0;
+    const bouncedSessions = parseInt(bounceRes.rows[0].bounced_sessions, 10) || 0;
+    const bounceRate = totalSessions > 0 ? Math.round((bouncedSessions / totalSessions) * 100) : 0;
+
     res.json({
       summary: {
         total_views: humanViews,
         bot_views: botViews,
-        unique_visitors: trafficRes.rows.reduce((sum, r) => sum + parseInt(r.unique_visitors, 10), 0)
+        unique_visitors: trafficRes.rows.reduce((sum, r) => sum + parseInt(r.unique_visitors, 10), 0),
+        avg_duration: parseInt(durationRes.rows[0].avg_duration, 10) || 0,
+        bounce_rate: bounceRate
       },
       traffic: trafficRes.rows,
       pages: pagesRes.rows,
       referrers: referrersRes.rows,
       countries: countriesRes.rows,
       devices: devicesRes.rows,
-      browsers: browsersRes.rows
+      browsers: browsersRes.rows,
+      scroll: scrollRes.rows[0] || { scroll_25: 0, scroll_50: 0, scroll_75: 0, scroll_100: 0, total_visits: 0 },
+      visitor_types: visitorTypeRes.rows,
+      events: eventsRes.rows,
+      faq: faqRes.rows
     });
   } catch (err) {
     console.error("Error fetching stats:", err);
