@@ -310,7 +310,7 @@ app.get('/api/stats', checkAuth, async (req, res) => {
       WHERE timestamp >= NOW() - INTERVAL '${daysLimit} days' AND is_bot = FALSE
       GROUP BY country
       ORDER BY views DESC
-      LIMIT 15;
+      LIMIT 250;
     `;
 
     // 5. Devices & Browsers breakdown
