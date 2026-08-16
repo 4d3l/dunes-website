@@ -1018,6 +1018,7 @@
             lockScreen.style.visibility = 'hidden';
             document.getElementById('dashboard-app').style.display = 'block';
             res.json().then(data => renderDashboard(data));
+            fetchDunesApp(password); // Dunes App live section — initial load
           }, 300);
         } else {
           showError();
