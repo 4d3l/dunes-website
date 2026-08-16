@@ -723,6 +723,70 @@
       </div>
     </div>
 
+    <!-- ═══ Dunes App — Live (data from the relay, not the website) ═══ -->
+    <div class="card" style="margin-bottom: 24px;">
+      <div class="card-header">
+        <h2 class="card-title">
+          <i data-feather="smartphone"></i>
+          Dunes App &mdash; Live Users
+        </h2>
+        <span id="dunes-app-updated" style="color: var(--text-muted, #8B949E); font-size: 0.8rem;"></span>
+      </div>
+      <div class="metrics-row" style="margin-bottom: 18px;">
+        <div class="metric-card">
+          <div class="metric-info">
+            <h3>Total Users</h3>
+            <div class="value" id="app-total-users">-</div>
+          </div>
+          <div class="metric-icon"><i data-feather="users"></i></div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-info">
+            <h3>Registered</h3>
+            <div class="value" id="app-registered">-</div>
+          </div>
+          <div class="metric-icon"><i data-feather="user-check"></i></div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-info">
+            <h3>Unregistered</h3>
+            <div class="value" id="app-unregistered">-</div>
+          </div>
+          <div class="metric-icon"><i data-feather="user"></i></div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-info">
+            <h3>Online Now</h3>
+            <div class="value" id="app-online" style="color: #4CAF50;">-</div>
+          </div>
+          <div class="metric-icon"><i data-feather="wifi"></i></div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-info">
+            <h3>In Calls Now</h3>
+            <div class="value" id="app-in-calls" style="color: #F5A623;">-</div>
+          </div>
+          <div class="metric-icon"><i data-feather="phone-call"></i></div>
+        </div>
+      </div>
+      <div style="overflow-x: auto;">
+        <table style="width: 100%; border-collapse: collapse; font-size: 0.85rem;">
+          <thead>
+            <tr style="text-align: left; color: #8B949E; border-bottom: 1px solid #21303D;">
+              <th style="padding: 8px;">Username</th>
+              <th style="padding: 8px;">Email</th>
+              <th style="padding: 8px;">Verified</th>
+              <th style="padding: 8px;">Sand ID</th>
+              <th style="padding: 8px;">Joined</th>
+            </tr>
+          </thead>
+          <tbody id="app-registered-table">
+            <tr><td colspan="5" style="padding: 12px; color: #8B949E;">Loading registered users&hellip;</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
     <!-- Row 1: Traffic Chart & Funnel -->
     <div class="dashboard-grid">
       <div class="card">
@@ -984,6 +1048,41 @@
         }
       } catch (err) {
         console.error("Error refreshing stats:", err);
+      }
+      fetchDunesApp(password);
+    }
+
+    // ─── Dunes App live stats — served by the RELAY (separate service) ──────
+    // Requires DASHBOARD_PASSWORD set on the relay's Render env with the SAME
+    // value as this dashboard's password.
+    const DUNES_RELAY_URL = 'https://dunes-relay-1.onrender.com';
+    async function fetchDunesApp(password) {
+      try {
+        const res = await fetch(`${DUNES_RELAY_URL}/admin/overview?pwd=${encodeURIComponent(password)}`);
+        if (!res.ok) {
+          document.getElementById('app-registered-table').innerHTML =
+            `<tr><td colspan="5" style="padding: 12px; color: #EF5350;">Relay stats unavailable (HTTP ${res.status}) — is DASHBOARD_PASSWORD set on the relay?</td></tr>`;
+          return;
+        }
+        const d = await res.json();
+        document.getElementById('app-total-users').innerText = Number(d.totalUsers).toLocaleString();
+        document.getElementById('app-registered').innerText = Number(d.registered).toLocaleString();
+        document.getElementById('app-unregistered').innerText = Number(d.unregistered).toLocaleString();
+        document.getElementById('app-online').innerText = Number(d.onlineNow).toLocaleString();
+        document.getElementById('app-in-calls').innerText = Number(d.activeCallUsers).toLocaleString();
+        document.getElementById('dunes-app-updated').innerText = 'updated ' + new Date(d.generatedAt).toLocaleTimeString();
+        const rows = (d.registeredUsers || []).map(u => `
+          <tr style="border-bottom: 1px solid rgba(33,48,61,0.5);">
+            <td style="padding: 8px; color: #F5A623;">${u.username ? '@' + u.username : '—'}</td>
+            <td style="padding: 8px;">${u.email || '—'}</td>
+            <td style="padding: 8px;">${u.email ? (u.email_verified ? '✓' : '✗') : '—'}</td>
+            <td style="padding: 8px; font-family: monospace; color: #8B949E;">${u.sand_id}</td>
+            <td style="padding: 8px; color: #8B949E;">${u.created_at ? new Date(u.created_at).toLocaleDateString() : '—'}</td>
+          </tr>`).join('');
+        document.getElementById('app-registered-table').innerHTML =
+          rows || '<tr><td colspan="5" style="padding: 12px; color: #8B949E;">No registered users yet.</td></tr>';
+      } catch (err) {
+        console.debug('Dunes app stats fetch failed:', err);
       }
     }
 
