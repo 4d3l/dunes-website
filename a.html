@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex">
+    <title>Add me on Dunes</title>
+    <link rel="icon" type="image/png" href="favicon.png">
+    <style>
+        :root {
+            --bg: #0D1117;
+            --bg2: #161B22;
+            --border: #21303D;
+            --accent: #F5A623;
+            --accent-grad: linear-gradient(135deg, #F5A623 0%, #E8722A 100%);
+            --text: #E8EBF0;
+            --text2: #8B9DC3;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            background: var(--bg);
+            color: var(--text);
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 24px;
+        }
+        .card {
+            background: var(--bg2);
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            padding: 40px 32px;
+            max-width: 420px;
+            width: 100%;
+            text-align: center;
+        }
+        .logo { width: 84px; height: 84px; border-radius: 22px; margin-bottom: 20px; }
+        h1 { font-size: 24px; margin-bottom: 10px; }
+        .sub { color: var(--text2); font-size: 15px; line-height: 1.55; margin-bottom: 28px; }
+        .btn {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            border-radius: 14px;
+            font-size: 16px;
+            font-weight: 700;
+            text-decoration: none;
+            margin-bottom: 12px;
+        }
+        .btn-primary { background: var(--accent-grad); color: #0D1117; }
+        .btn-secondary { background: transparent; color: var(--accent); border: 1.5px solid var(--border); }
+        .note { color: var(--text2); font-size: 12.5px; margin-top: 18px; line-height: 1.5; }
+        .e2e { color: var(--accent); font-weight: 600; }
+        #open-btn { display: none; }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <img src="assets/icon.png" alt="Dunes" class="logo">
+        <h1 id="title">You're invited to Dunes</h1>
+        <p class="sub" id="sub">
+            Someone wants to connect with you on Dunes —
+            the <span class="e2e">end-to-end encrypted</span> messenger with no phone number,
+            no registration and no tracking.
+        </p>
+        <a class="btn btn-primary" id="open-btn" href="#">Open in Dunes</a>
+        <a class="btn btn-secondary" id="download-btn" href="/#download">Download Dunes</a>
+        <p class="note" id="note">
+            Already have Dunes? Tap "Open in Dunes" to add this contact instantly.
+            The invite code never leaves your device — this page can't see it.
+        </p>
+    </div>
+    <script>
+        (function () {
+            // The id-card travels in the URL fragment — it is never sent to
+            // the server. This script only hands it to the Dunes app.
+            var code = location.hash.slice(1);
+            var isAndroid = /android/i.test(navigator.userAgent);
+            var openBtn = document.getElementById('open-btn');
+
+            if (!code) {
+                document.getElementById('title').textContent = 'Get Dunes';
+                document.getElementById('sub').innerHTML =
+                    'The <span class="e2e">end-to-end encrypted</span> messenger with no phone number, no registration and no tracking.';
+                document.getElementById('note').textContent = '';
+                return;
+            }
+
+            if (isAndroid) {
+                // intent:// opens Dunes when installed and falls back to the
+                // download section when it isn't. The code rides in the path
+                // (percent-encoded) because intent URIs can't carry fragments.
+                openBtn.href = 'intent://a/' + code +
+                    '#Intent;scheme=dunes;package=com.dunes.chat;' +
+                    'S.browser_fallback_url=' + encodeURIComponent('https://dunes.chat/#download') + ';end';
+                openBtn.style.display = 'block';
+            } else {
+                document.getElementById('note').textContent =
+                    'Dunes is currently available for Android. Open this link on your Android phone to add this contact.';
+            }
+        })();
+    </script>
+</body>
+</html>
